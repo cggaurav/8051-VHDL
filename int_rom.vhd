@@ -1,0 +1,111 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+
+entity int_rom is
+port(
+		clk      : in  std_logic;
+		rst      : in  std_logic;
+		rd       : in  std_logic;
+		addr     : in  std_logic_vector (15 downto 0);
+		data     : out std_logic_vector (7 downto 0)
+);
+end int_rom;
+
+architecture Behavioral of int_rom is
+	type rom_type is array (0 to 4095) of STD_LOGIC_VECTOR (7 downto 0);
+	constant PROGRAM : ROM_TYPE := (
+	
+	"10010000", --MOV DPTR, "FFAA"
+	"11111111",
+	"10101010",
+	"11010011", --SETB C
+	"11010010", --SETB EH
+	"00001110",
+	"10010010", --MOV 78H, C
+	"01111000",
+	"11000011", --CLR C
+	"10100010", --MOV C, 0EH
+	"00001110",
+	"11000010", --CLR 78H
+	"01111000",
+	
+--	"01110100", --MOV A, #08
+--	"00001000",							-- ACC = #08
+--	"11111101", --MOV R5, A			-- Band 2 - ram[21] = #08
+--	"00100100",	--ADD A, #03		
+--	"00000011",							-- ACC = #0B
+--	"11110101", --MOV x70, A
+--	"01110000",							-- ram[112] = #0B
+--	"10101111", --MOV R7, x70
+--	"01110000",							-- ram[23] = #0B
+--	"10001101", --MOV x71, R5
+--	"01110001",							-- ram[113] = #08
+--	"10000101", --MOV x72, x71
+--	"01110001",
+--	"01110010",							-- ram[114] = #08
+--	"01110101", --MOV x73, #90
+--	"01110011",
+--	"10010000",							-- ram[115] = #90
+--	"01111000", --MOV R0, #70
+--	"01110000",							-- ram[16] = #70
+--	"10000110", --MOV x72, @R0
+--	"01110010",							-- ram[114] = #0B
+--	"10100110", --MOV @R0, x71		
+--	"01110001",							-- ram[112] = #08
+--	"11110110", --MOV @R0, A		-- ram[112] = #0B
+--	"01110110", --MOV @R0, #11		-- ram[112] = #11
+--	"00010001",
+	
+	
+	
+	
+--	"01110100", --MOV A, #08
+--	"00001000",
+--	"11110101", --MOV x70, A
+--	"01110000",
+--	"00100100",	--ADD A, #03
+--	"00000011",
+--	"01111000", --MOV R0, #70
+--	"01110000",	
+--	"11100110", --MOV A, @R0
+	
+--	"00100100",	--ADD A, #03
+--	"00000011",
+--	"11110101", --ADD x78, A
+--	"01111000",
+--	"01111010", --MOV R2, x05
+--	"00000101",
+--	"00101010", --ADD A, R2
+--	"11101010", --MOV A, R2
+--	"11100101", --MOV A, x78
+--	"01111000",
+
+--	"00101001", --ADD A,R1
+--	"11101001", --LABEL1: MOV A,R1
+--	"00100100", --ADD A,#01H
+--	"00000001",
+--	"11111001", --MOV R1,A
+--	"10111001", --CJNE R1,#04H,LABEL1
+--	"00000100",
+--	"11111001",
+--	"10001001", --MOV 90H,R1
+--	"10010000",
+	others => "00000000"
+);
+
+	begin
+
+	process (rst, rd, addr)
+	begin
+		if( rst = '1' ) then
+			data <= "--------";
+		elsif( rd = '1' ) then
+			data <= PROGRAM(conv_integer(addr));
+		else
+			data <= "--------";
+		end if;
+	end process;
+end Behavioral;

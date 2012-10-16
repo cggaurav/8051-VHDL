@@ -1,0 +1,40 @@
+Release 13.2 - xst O.61xd (nt)
+Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.
+--> Parameter TMPDIR set to D:/Myproject/xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 1.00 secs
+Total CPU time to Xst completion: 0.57 secs
+ 
+--> Parameter xsthdpdir set to D:/Myproject/xst
+
+
+Total REAL time to Xst completion: 1.00 secs
+Total CPU time to Xst completion: 0.60 secs
+ 
+--> WARNING:Xst:3164 - Option "-debug" found multiple times in the command line. Only the first occurence is considered.
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling vhdl file "D:/Myproject/constants.vhd" in Library work.
+Package <constants> compiled.
+Compiling vhdl file "D:/Myproject/csadder.vhd" in Library work.
+Entity <csadder> compiled.
+Entity <csadder> (Architecture <csadderBeh>) compiled.
+Compiling vhdl file "D:/Myproject/fastalu.vhd" in Library work.
+Entity <fastalu> compiled.
+Entity <fastalu> (Architecture <fastalu_arch>) compiled.
+
+
+Total REAL time to Xst completion: 1.00 secs
+Total CPU time to Xst completion: 1.07 secs
+ 
+--> 
+
+Total memory usage is 151168 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :    1 (   0 filtered)
+Number of infos    :    0 (   0 filtered)
+

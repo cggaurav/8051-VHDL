@@ -1,0 +1,2 @@
+xst -intstyle ise -ifn "D:/Myproject/i8051_top.xst" -ofn "D:/Myproject/i8051_top.syr" 
+netgen -intstyle ise -insert_glbl true -w -dir netgen/synthesis -ofmt verilog -sim i8051_top.ngc i8051_top_synthesis.v 

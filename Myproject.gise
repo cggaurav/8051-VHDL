@@ -47,7 +47,6 @@
     <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="int_rom_stx_beh.prj"/>
     <file xil_pn:fileType="FILE_DIRECTORY" xil_pn:name="isim"/>
     <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_CMD" xil_pn:name="isim.cmd"/>
-    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_LOG" xil_pn:name="isim.log"/>
     <file xil_pn:fileType="FILE_DIRECTORY" xil_pn:name="netgen"/>
     <file xil_pn:fileType="FILE_NETGEN_REPORT" xil_pn:name="netgen/synthesis/i8051_top_synthesis.nlf"/>
     <file xil_pn:fileType="FILE_VERILOG" xil_pn:name="netgen/synthesis/i8051_top_synthesis.v"/>
@@ -77,13 +76,9 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1350393747" xil_pn:in_ck="-1045997680193625984" xil_pn:name="TRAN_copyAbstractToPostAbstractSimulation" xil_pn:start_ts="1350393747">
+    <transform xil_pn:end_ts="1350651459" xil_pn:in_ck="-1045997680193625984" xil_pn:name="TRAN_copyAbstractToPostAbstractSimulation" xil_pn:start_ts="1350651459">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
-      <status xil_pn:value="OutOfDateForInputs"/>
-      <status xil_pn:value="OutOfDateForOutputs"/>
-      <status xil_pn:value="InputChanged"/>
-      <status xil_pn:value="OutputChanged"/>
       <outfile xil_pn:name="8051_top_fpga.vhd"/>
       <outfile xil_pn:name="constants.vhd"/>
       <outfile xil_pn:name="csadder.vhd"/>
@@ -110,14 +105,9 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1350393747" xil_pn:in_ck="-1045997680193625984" xil_pn:name="TRAN_copyPostAbstractToPreSimulation" xil_pn:start_ts="1350393747">
+    <transform xil_pn:end_ts="1350651459" xil_pn:in_ck="-1045997680193625984" xil_pn:name="TRAN_copyPostAbstractToPreSimulation" xil_pn:start_ts="1350651459">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
-      <status xil_pn:value="OutOfDateForInputs"/>
-      <status xil_pn:value="OutOfDateForPredecessor"/>
-      <status xil_pn:value="OutOfDateForOutputs"/>
-      <status xil_pn:value="InputChanged"/>
-      <status xil_pn:value="OutputChanged"/>
       <outfile xil_pn:name="8051_top_fpga.vhd"/>
       <outfile xil_pn:name="constants.vhd"/>
       <outfile xil_pn:name="csadder.vhd"/>
@@ -132,31 +122,19 @@
       <outfile xil_pn:name="sequencer2 .vhd"/>
       <outfile xil_pn:name="test.vhd"/>
     </transform>
-    <transform xil_pn:end_ts="1350393753" xil_pn:in_ck="-1045997680193625984" xil_pn:name="TRAN_ISimulateBehavioralModelRunFuse" xil_pn:prop_ck="1172389459669044308" xil_pn:start_ts="1350393747">
+    <transform xil_pn:end_ts="1350651466" xil_pn:in_ck="-1045997680193625984" xil_pn:name="TRAN_ISimulateBehavioralModelRunFuse" xil_pn:prop_ck="1172389459669044308" xil_pn:start_ts="1350651459">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
-      <status xil_pn:value="OutOfDateForInputs"/>
-      <status xil_pn:value="OutOfDateForProperties"/>
-      <status xil_pn:value="OutOfDateForPredecessor"/>
-      <status xil_pn:value="OutOfDateForOutputs"/>
-      <status xil_pn:value="InputChanged"/>
-      <status xil_pn:value="OutputChanged"/>
       <outfile xil_pn:name="fuse.log"/>
       <outfile xil_pn:name="isim"/>
-      <outfile xil_pn:name="isim.log"/>
       <outfile xil_pn:name="test_beh.prj"/>
       <outfile xil_pn:name="test_isim_beh.exe"/>
       <outfile xil_pn:name="xilinxsim.ini"/>
     </transform>
-    <transform xil_pn:end_ts="1350393754" xil_pn:in_ck="6654477430484604635" xil_pn:name="TRAN_ISimulateBehavioralModel" xil_pn:prop_ck="1912148073333665495" xil_pn:start_ts="1350393753">
+    <transform xil_pn:end_ts="1350651466" xil_pn:in_ck="6654477430484604635" xil_pn:name="TRAN_ISimulateBehavioralModel" xil_pn:prop_ck="1912148073333665495" xil_pn:start_ts="1350651466">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
-      <status xil_pn:value="OutOfDateForProperties"/>
-      <status xil_pn:value="OutOfDateForPredecessor"/>
-      <status xil_pn:value="OutOfDateForOutputs"/>
-      <status xil_pn:value="OutputChanged"/>
       <outfile xil_pn:name="isim.cmd"/>
-      <outfile xil_pn:name="isim.log"/>
       <outfile xil_pn:name="test_isim_beh.wdb"/>
     </transform>
     <transform xil_pn:end_ts="1349029224" xil_pn:name="TRAN_copyInitialToXSTAbstractSynthesis" xil_pn:start_ts="1349029224">
@@ -195,8 +173,8 @@
       <status xil_pn:value="OutOfDateForOutputs"/>
       <status xil_pn:value="InputChanged"/>
       <status xil_pn:value="OutputChanged"/>
+      <status xil_pn:value="OutputRemoved"/>
       <outfile xil_pn:name=".lso"/>
-      <outfile xil_pn:name="_xmsgs/xst.xmsgs"/>
       <outfile xil_pn:name="i8051_top.lso"/>
       <outfile xil_pn:name="i8051_top.ngc"/>
       <outfile xil_pn:name="i8051_top.ngr"/>
@@ -207,7 +185,6 @@
       <outfile xil_pn:name="i8051_top_vhdl.prj"/>
       <outfile xil_pn:name="i8051_top_xst.xrpt"/>
       <outfile xil_pn:name="webtalk_pn.xml"/>
-      <outfile xil_pn:name="xst"/>
     </transform>
     <transform xil_pn:end_ts="1349029320" xil_pn:name="TRAN_compileBCD2" xil_pn:prop_ck="3235271162397068641" xil_pn:start_ts="1349029320">
       <status xil_pn:value="SuccessfullyRun"/>
@@ -216,10 +193,10 @@
     <transform xil_pn:end_ts="1349029328" xil_pn:in_ck="-6432634985234107249" xil_pn:name="TRAN_postSynthesisSimModel" xil_pn:prop_ck="547448974741123101" xil_pn:start_ts="1349029320">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
       <status xil_pn:value="OutOfDateForPredecessor"/>
-      <outfile xil_pn:name="netgen"/>
-      <outfile xil_pn:name="netgen/synthesis/i8051_top_synthesis.nlf"/>
-      <outfile xil_pn:name="netgen/synthesis/i8051_top_synthesis.v"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="OutputRemoved"/>
     </transform>
   </transforms>
 

@@ -4,13 +4,13 @@ Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.34 secs
+Total CPU time to Xst completion: 0.45 secs
  
 --> Parameter xsthdpdir set to D:/Myproject/xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.34 secs
+Total CPU time to Xst completion: 0.46 secs
  
 --> WARNING:Xst:3164 - Option "-debug" found multiple times in the command line. Only the first occurence is considered.
 
@@ -19,15 +19,15 @@ Total CPU time to Xst completion: 0.34 secs
 =========================================================================
 Compiling vhdl file "D:/Myproject/int_rom.vhd" in Library work.
 Entity <int_rom> compiled.
-Entity <int_rom> (Architecture <behavioral>) compiled.
+Entity <int_rom> (Architecture <Behavioral>) compiled.
 
 
-Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.41 secs
+Total REAL time to Xst completion: 1.00 secs
+Total CPU time to Xst completion: 0.75 secs
  
 --> 
 
-Total memory usage is 157172 kilobytes
+Total memory usage is 157108 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings :    1 (   0 filtered)

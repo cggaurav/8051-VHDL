@@ -36,6 +36,8 @@ process (clk, rst, rdByte, rdBit, addr)
 		end loop;
 		doByte <= "ZZZZZZZZ";
 		doBit <= 'Z';
+		--for testing
+		RAM(16) <= "00001111";
 
 	elsif (rdByte = '1') then
 		if (addr(7) = '0') then

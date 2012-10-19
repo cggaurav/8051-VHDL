@@ -24,4 +24,3 @@ at 0 ps, Instance /test/uut/MUL/ : Warning: There is an 'U'|'X'|'W'|'Z'|'-' in a
 at 0 ps, Instance /test/uut/DIV/ : Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 Finished circuit initialization process.
 # run 2000ns
-# run 2000ns

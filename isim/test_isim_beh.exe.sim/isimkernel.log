@@ -2,14 +2,14 @@ Command line:
    test_isim_beh.exe
      -simmode  gui
      -simrunnum  0
-     -socket  57498
+     -socket  54724
 
-Sun Oct 21 15:50:00 2012
+Sun Oct 21 17:41:32 2012
 
 
- Elaboration Time: 0.0468 sec
+ Elaboration Time: 0.0312 sec
 
- Current Memory Usage: 949.26 Meg
+ Current Memory Usage: 948.793 Meg
 
  Total Signals          : 271
  Total Nets             : 1926
@@ -19,11 +19,11 @@ Sun Oct 21 15:50:00 2012
  Total Processes        : 105
  Total Traceable Variables  : 48
  Total Scalar Nets and Variables : 35292
-Total Line Count : 796
+Total Line Count : 1437
 
- Total Simulation Time: 0.405603 sec
+ Total Simulation Time: 0.499203 sec
 
- Current Memory Usage: 949.26 Meg
+ Current Memory Usage: 949.187 Meg
 
-Sun Oct 21 15:54:48 2012
+Sun Oct 21 17:45:55 2012
 

@@ -14,7 +14,7 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="19" />
+   <WVObjectSize size="20" />
    <wvobject fp_name="/test/clk" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -78,6 +78,10 @@
    <wvobject fp_name="/test/uut/RAM/ram[18]" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">[18]</obj_property>
       <obj_property name="ObjectShortName">ram[18]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test/uut/RAM/ram[112]" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">[112]</obj_property>
+      <obj_property name="ObjectShortName">ram[112]</obj_property>
    </wvobject>
    <wvobject fp_name="/test/uut/RAM/ram[120]" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">[120]</obj_property>

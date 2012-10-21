@@ -72,40 +72,11 @@
   </files>
 
   <transforms xmlns="http://www.xilinx.com/XMLSchema">
-    <transform xil_pn:end_ts="1349027775" xil_pn:name="TRAN_copyInitialToAbstractSimulation" xil_pn:start_ts="1349027775">
+    <transform xil_pn:end_ts="1350805275" xil_pn:name="TRAN_copyInitialToAbstractSimulation" xil_pn:start_ts="1350805275">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1350651459" xil_pn:in_ck="-1045997680193625984" xil_pn:name="TRAN_copyAbstractToPostAbstractSimulation" xil_pn:start_ts="1350651459">
-      <status xil_pn:value="SuccessfullyRun"/>
-      <status xil_pn:value="ReadyToRun"/>
-      <outfile xil_pn:name="8051_top_fpga.vhd"/>
-      <outfile xil_pn:name="constants.vhd"/>
-      <outfile xil_pn:name="csadder.vhd"/>
-      <outfile xil_pn:name="divider.vhd"/>
-      <outfile xil_pn:name="ext_interrupt.vhd"/>
-      <outfile xil_pn:name="fastalu.vhd"/>
-      <outfile xil_pn:name="int_handler.vhd"/>
-      <outfile xil_pn:name="int_ram.vhd"/>
-      <outfile xil_pn:name="int_rom.vhd"/>
-      <outfile xil_pn:name="multiplier.vhd"/>
-      <outfile xil_pn:name="regfile.vhd"/>
-      <outfile xil_pn:name="sequencer2 .vhd"/>
-      <outfile xil_pn:name="test.vhd"/>
-    </transform>
-    <transform xil_pn:end_ts="1349814042" xil_pn:name="TRAN_xawsToSimhdl" xil_pn:prop_ck="5812269477055105344" xil_pn:start_ts="1349814042">
-      <status xil_pn:value="SuccessfullyRun"/>
-      <status xil_pn:value="ReadyToRun"/>
-    </transform>
-    <transform xil_pn:end_ts="1349814042" xil_pn:name="TRAN_schematicsToHdlSim" xil_pn:prop_ck="-7562263831325440312" xil_pn:start_ts="1349814042">
-      <status xil_pn:value="SuccessfullyRun"/>
-      <status xil_pn:value="ReadyToRun"/>
-    </transform>
-    <transform xil_pn:end_ts="1349027775" xil_pn:name="TRAN_regenerateCoresSim" xil_pn:prop_ck="-9002637186947432182" xil_pn:start_ts="1349027775">
-      <status xil_pn:value="SuccessfullyRun"/>
-      <status xil_pn:value="ReadyToRun"/>
-    </transform>
-    <transform xil_pn:end_ts="1350651459" xil_pn:in_ck="-1045997680193625984" xil_pn:name="TRAN_copyPostAbstractToPreSimulation" xil_pn:start_ts="1350651459">
+    <transform xil_pn:end_ts="1350805287" xil_pn:in_ck="-1045997680193625984" xil_pn:name="TRAN_copyAbstractToPostAbstractSimulation" xil_pn:start_ts="1350805287">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <outfile xil_pn:name="8051_top_fpga.vhd"/>
@@ -122,7 +93,36 @@
       <outfile xil_pn:name="sequencer2 .vhd"/>
       <outfile xil_pn:name="test.vhd"/>
     </transform>
-    <transform xil_pn:end_ts="1350651466" xil_pn:in_ck="-1045997680193625984" xil_pn:name="TRAN_ISimulateBehavioralModelRunFuse" xil_pn:prop_ck="1172389459669044308" xil_pn:start_ts="1350651459">
+    <transform xil_pn:end_ts="1350805275" xil_pn:name="TRAN_xawsToSimhdl" xil_pn:prop_ck="5812269477055105344" xil_pn:start_ts="1350805275">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1350805275" xil_pn:name="TRAN_schematicsToHdlSim" xil_pn:prop_ck="-7562263831325440312" xil_pn:start_ts="1350805275">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1350805275" xil_pn:name="TRAN_regenerateCoresSim" xil_pn:prop_ck="-9002637186947432182" xil_pn:start_ts="1350805275">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1350805287" xil_pn:in_ck="-1045997680193625984" xil_pn:name="TRAN_copyPostAbstractToPreSimulation" xil_pn:start_ts="1350805287">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <outfile xil_pn:name="8051_top_fpga.vhd"/>
+      <outfile xil_pn:name="constants.vhd"/>
+      <outfile xil_pn:name="csadder.vhd"/>
+      <outfile xil_pn:name="divider.vhd"/>
+      <outfile xil_pn:name="ext_interrupt.vhd"/>
+      <outfile xil_pn:name="fastalu.vhd"/>
+      <outfile xil_pn:name="int_handler.vhd"/>
+      <outfile xil_pn:name="int_ram.vhd"/>
+      <outfile xil_pn:name="int_rom.vhd"/>
+      <outfile xil_pn:name="multiplier.vhd"/>
+      <outfile xil_pn:name="regfile.vhd"/>
+      <outfile xil_pn:name="sequencer2 .vhd"/>
+      <outfile xil_pn:name="test.vhd"/>
+    </transform>
+    <transform xil_pn:end_ts="1350805293" xil_pn:in_ck="-1045997680193625984" xil_pn:name="TRAN_ISimulateBehavioralModelRunFuse" xil_pn:prop_ck="1172389459669044308" xil_pn:start_ts="1350805287">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <outfile xil_pn:name="fuse.log"/>
@@ -131,7 +131,7 @@
       <outfile xil_pn:name="test_isim_beh.exe"/>
       <outfile xil_pn:name="xilinxsim.ini"/>
     </transform>
-    <transform xil_pn:end_ts="1350651466" xil_pn:in_ck="6654477430484604635" xil_pn:name="TRAN_ISimulateBehavioralModel" xil_pn:prop_ck="1912148073333665495" xil_pn:start_ts="1350651466">
+    <transform xil_pn:end_ts="1350805293" xil_pn:in_ck="6654477430484604635" xil_pn:name="TRAN_ISimulateBehavioralModel" xil_pn:prop_ck="1912148073333665495" xil_pn:start_ts="1350805293">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <outfile xil_pn:name="isim.cmd"/>

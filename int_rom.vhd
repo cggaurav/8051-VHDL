@@ -18,7 +18,7 @@ architecture Behavioral of int_rom is
 	type rom_type is array (0 to 4095) of STD_LOGIC_VECTOR (7 downto 0);
 	constant PROGRAM : ROM_TYPE := (
 	
-	"00101000", --ADD A,R0
+--	"00101000", --ADD A,R0
 	
 --	"10010000", --MOV DPTR, "FFAA"
 --	"11111111",
@@ -74,16 +74,16 @@ architecture Behavioral of int_rom is
 --	"01110000",	
 --	"11100110", --MOV A, @R0
 	
---	"00100100",	--ADD A, #03
---	"00000011",
---	"11110101", --ADD x78, A
---	"01111000",
---	"01111010", --MOV R2, x05
---	"00000101",
---	"00101010", --ADD A, R2
---	"11101010", --MOV A, R2
---	"11100101", --MOV A, x78
---	"01111000",
+	"00100100",	--ADD A, #03 		-- using band 2 register
+	"00000011",							-- ACC = #03
+	"11110101", --MOV x78, A
+	"01111000",							-- ram[120] = #03
+	"01111010", --MOV R2, #05
+	"00000101",							-- ram[18] = #05
+	"00101010", --ADD A, R2			-- ACC = #08
+	"11101010", --MOV A, R2			-- ACC = #05
+	"11100101", --MOV A, x78		-- ACC = #03
+	"01111000",
 
 --	"00101001", --ADD A,R1
 --	"11101001", --LABEL1: MOV A,R1

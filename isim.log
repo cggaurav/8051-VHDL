@@ -13,7 +13,6 @@ Simulator is doing circuit initialization process.
 at 0 ps, Instance /test/uut/MUL/ : Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 at 0 ps, Instance /test/uut/DIV/ : Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 Finished circuit initialization process.
-# run 10000ns
 ISim O.61xd (signature 0x6dd86d03)
 WARNING: A WEBPACK license was found.
 WARNING: Please use Xilinx License Configuration Manager to check out a full ISim license.
@@ -24,8 +23,4 @@ Simulator is doing circuit initialization process.
 at 0 ps, Instance /test/uut/MUL/ : Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 at 0 ps, Instance /test/uut/DIV/ : Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 Finished circuit initialization process.
-# run 10000ns
-# run 2000ns
-# run 2000ns
-# run 2000ns
-# run 4000ns
+# run 8000ns

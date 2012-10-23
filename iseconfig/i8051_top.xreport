@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2012-10-23T22:39:03</DateModified>
+  <DateModified>2012-10-24T02:49:24</DateModified>
   <ModuleName>i8051_top</ModuleName>
   <SummaryTimeStamp>Unknown</SummaryTimeStamp>
-  <SavedFilePath>D:/Myproject/iseconfig/i8051_top.xreport</SavedFilePath>
-  <ImplementationReportsDirectory>D:/Myproject\</ImplementationReportsDirectory>
+  <SavedFilePath>C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/iseconfig/i8051_top.xreport</SavedFilePath>
+  <ImplementationReportsDirectory>C:/Users/cggauravVB/Documents/CG3207/8051-VHDL\</ImplementationReportsDirectory>
   <DateInitialized>2012-09-30T23:57:02</DateInitialized>
   <EnableMessageFiltering>false</EnableMessageFiltering>
  </header>

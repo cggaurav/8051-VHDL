@@ -452,7 +452,897 @@ begin
 							
 						when others =>
 					end case; -- end case machine cycle
-					
+
+				-- ADD A, direct
+				-- 2 bytes, 1 cycle
+				-- Author: Gaurav Chandrashekar
+				-- Status: Simulated
+				when "00100101" =>
+					case machine_cycle is
+						when M1 =>
+							case cpu_state is
+								when S2 =>
+									case exe_state is
+										when P1	=>
+											RAM_RD_BYTE_START(x"D0");
+											exe_state <= P2;
+										
+										when P2	=>
+											RAM_RD_BYTE_START(x"E0");
+											PSW <= i_ram_doByte;
+											exe_state <= P1;
+											cpu_state <= S3;
+											
+										when others =>
+									end case; -- end case exe state
+								
+								when S3 =>
+									case exe_state is
+										when P1	=>
+											ACC <= i_ram_doByte;
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S4;
+											
+										when others =>
+									end case; -- end case exe state
+								when S4 => 
+									case exe_state is
+										when P1	=>  
+											ROM_RD_START(PC);
+											exe_state <= P2;
+										
+										when P2	=>
+											PC <= PC + 1;
+											RAM_RD_BYTE_START(i_rom_data);
+											ROM_STOP;
+											exe_state <= P1;
+											cpu_state <= S5;
+											
+										when others =>
+									end case; -- end case exe state
+								when S5 =>
+									case exe_state is
+										when P1	=> 
+											alu_src_1L <= ACC;
+											alu_src_2L <= i_ram_doByte;
+											alu_op_code <= ALU_OPC_ADD;
+											alu_by_wd <= '0';
+											exe_state <= P2;
+										
+										when P2	=>
+											RAM_WR_BYTE_START(x"E0", alu_ans_L);
+											UPDATE_PSW;
+											exe_state <= P1;
+											cpu_state <= S6;
+											
+										when others =>
+									end case; -- end case exe state
+								when S6 =>
+									case exe_state is
+										when P1	=>  
+											RAM_WR_BYTE_START(x"D0", PSW);
+											exe_state <= P2;
+										
+										when P2	=>
+											RAM_STOP;
+											exe_state <= P1;
+											cpu_state <= S1;
+											machine_cycle <= M1;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when others =>
+							end case; -- end case cpu state
+							
+						when others =>
+					end case; -- end case machine cycle
+
+
+				-- ADD A,@Ri
+				-- 1 byte, 1 cycle
+				-- Author: Gaurav Chandrashekar
+				-- Status: Simulated
+				when  "00100110" | "00100111" =>
+					case machine_cycle is
+						when M1 =>
+							case cpu_state is
+								when S2 =>
+									case exe_state is
+										when P1	=>
+											RAM_RD_BYTE_START(x"D0");
+											exe_state <= P2;
+										
+										when P2	=>
+											RAM_RD_BYTE_START("000" & i_ram_doByte(4 downto 3) & "00" & IR(0));
+											PSW <= i_ram_doByte;
+											exe_state <= P1;
+											cpu_state <= S3;
+											
+										when others =>
+									end case; -- end case exe state
+								
+								when S3 =>
+									case exe_state is
+										when P1	=>
+											RAM_RD_BYTE_START(x"E0");
+											DR <= i_ram_doByte;
+											exe_state <= P2;
+										
+										when P2	=>
+											alu_src_1L <= i_ram_doByte;
+											alu_src_2L <= DR;
+											alu_op_code <= ALU_OPC_ADD;
+											alu_by_wd <= '0';
+											exe_state <= P1;
+											cpu_state <= S4;
+											
+										when others =>
+									end case; -- end case exe state
+								when S4 => -- 1 byte instruction, do nothing here
+									case exe_state is
+										when P1	=>  
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S5;
+											
+										when others =>
+									end case; -- end case exe state
+								when S5 =>
+									case exe_state is
+										when P1	=> 
+											RAM_WR_BYTE_START(x"E0", alu_ans_L);
+											UPDATE_PSW;
+											exe_state <= P2;
+										
+										when P2	=>
+											RAM_WR_BYTE_START(x"D0", PSW);
+											exe_state <= P1;
+											cpu_state <= S6;
+											
+										when others =>
+									end case; -- end case exe state
+								when S6 =>
+									case exe_state is
+										when P1	=>  
+											RAM_STOP;
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S1;
+											machine_cycle <= M1;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when others =>
+							end case; -- end case cpu state
+							
+						when others =>
+					end case; -- end case machine cycle
+
+				-- ADDC A,Rn
+				-- 1 byte, 1 cycle
+				-- Author: Gaurav Chandrashekar
+				-- Status: Simulated
+				when  "00111000" |
+						"00111001" |
+						"00111010" |
+						"00111011" |
+						"00111100" |
+						"00111101" |
+						"00111110" |
+						"00111111" =>
+					case machine_cycle is
+						when M1 =>
+							case cpu_state is
+								when S2 =>
+									case exe_state is
+										when P1	=>
+											RAM_RD_BYTE_START(x"D0");
+											exe_state <= P2;
+										
+										when P2	=>
+											RAM_RD_BYTE_START("000" & i_ram_doByte(4 downto 3) & IR(2 downto 0));
+											PSW <= i_ram_doByte;
+											exe_state <= P1;
+											cpu_state <= S3;
+											
+										when others =>
+									end case; -- end case exe state
+								
+								when S3 =>
+									case exe_state is
+										when P1	=>
+											RAM_RD_BYTE_START(x"E0");
+											DR <= i_ram_doByte;
+											exe_state <= P2;
+										
+										when P2	=>
+											alu_src_1L <= i_ram_doByte;
+											alu_src_2L <= DR;
+											alu_op_code <= ALU_OPC_ADC;
+											alu_by_wd <= '0';
+											alu_cy_bw <= PSW(7);
+											exe_state <= P1;
+											cpu_state <= S4;
+											
+										when others =>
+									end case; -- end case exe state
+								when S4 => -- 1 byte instruction, do nothing here
+									case exe_state is
+										when P1	=>  
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S5;
+											
+										when others =>
+									end case; -- end case exe state
+								when S5 =>
+									case exe_state is
+										when P1	=> 
+											RAM_WR_BYTE_START(x"E0", alu_ans_L);
+											UPDATE_PSW;
+											exe_state <= P2;
+										
+										when P2	=>
+											RAM_WR_BYTE_START(x"D0", PSW);
+											exe_state <= P1;
+											cpu_state <= S6;
+											
+										when others =>
+									end case; -- end case exe state
+								when S6 =>
+									case exe_state is
+										when P1	=>  
+											RAM_STOP;
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S1;
+											machine_cycle <= M1;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when others =>
+							end case; -- end case cpu state
+							
+						when others =>
+					end case; -- end case machine cycle
+
+				-- ADDC A, direct
+				-- 2 bytes, 1 cycle
+				-- Author: Gaurav Chandrashekar
+				-- Status: Simulated
+				when "00110101" =>
+					case machine_cycle is
+						when M1 =>
+							case cpu_state is
+								when S2 =>
+									case exe_state is
+										when P1	=>
+											RAM_RD_BYTE_START(x"D0");
+											exe_state <= P2;
+										
+										when P2	=>
+											RAM_RD_BYTE_START(x"E0");
+											PSW <= i_ram_doByte;
+											exe_state <= P1;
+											cpu_state <= S3;
+											
+										when others =>
+									end case; -- end case exe state
+								
+								when S3 =>
+									case exe_state is
+										when P1	=>
+											ACC <= i_ram_doByte;
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S4;
+											
+										when others =>
+									end case; -- end case exe state
+								when S4 => 
+									case exe_state is
+										when P1	=>  
+											ROM_RD_START(PC);
+											exe_state <= P2;
+										
+										when P2	=>
+											PC <= PC + 1;
+											RAM_RD_BYTE_START(i_rom_data);
+											ROM_STOP;
+											exe_state <= P1;
+											cpu_state <= S5;
+											
+										when others =>
+									end case; -- end case exe state
+								when S5 =>
+									case exe_state is
+										when P1	=> 
+											alu_src_1L <= ACC;
+											alu_src_2L <= i_ram_doByte;
+											alu_op_code <= ALU_OPC_ADC;
+											alu_by_wd <= '0';
+											alu_cy_bw <= PSW(7);
+											exe_state <= P2;
+										
+										when P2	=>
+											RAM_WR_BYTE_START(x"E0", alu_ans_L);
+											UPDATE_PSW;
+											exe_state <= P1;
+											cpu_state <= S6;
+											
+										when others =>
+									end case; -- end case exe state
+								when S6 =>
+									case exe_state is
+										when P1	=>  
+											RAM_WR_BYTE_START(x"D0", PSW);
+											exe_state <= P2;
+										
+										when P2	=>
+											RAM_STOP;
+											exe_state <= P1;
+											cpu_state <= S1;
+											machine_cycle <= M1;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when others =>
+							end case; -- end case cpu state
+							
+						when others =>
+					end case; -- end case machine cycle
+
+
+				-- ADDC A,@Ri
+				-- 1 byte, 1 cycle
+				-- Author: Gaurav Chandrashekar
+				-- Status: Simulated
+				when  "00110110" | "00110111" =>
+					case machine_cycle is
+						when M1 =>
+							case cpu_state is
+								when S2 =>
+									case exe_state is
+										when P1	=>
+											RAM_RD_BYTE_START(x"D0");
+											exe_state <= P2;
+										
+										when P2	=>
+											RAM_RD_BYTE_START("000" & i_ram_doByte(4 downto 3) & "00" & IR(0));
+											PSW <= i_ram_doByte;
+											exe_state <= P1;
+											cpu_state <= S3;
+											
+										when others =>
+									end case; -- end case exe state
+								
+								when S3 =>
+									case exe_state is
+										when P1	=>
+											RAM_RD_BYTE_START(x"E0");
+											DR <= i_ram_doByte;
+											exe_state <= P2;
+										
+										when P2	=>
+											alu_src_1L <= i_ram_doByte;
+											alu_src_2L <= DR;
+											alu_op_code <= ALU_OPC_ADC;
+											alu_by_wd <= '0';
+											alu_cy_bw <= PSW(7);
+											exe_state <= P1;
+											cpu_state <= S4;
+											
+										when others =>
+									end case; -- end case exe state
+								when S4 => -- 1 byte instruction, do nothing here
+									case exe_state is
+										when P1	=>  
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S5;
+											
+										when others =>
+									end case; -- end case exe state
+								when S5 =>
+									case exe_state is
+										when P1	=> 
+											RAM_WR_BYTE_START(x"E0", alu_ans_L);
+											UPDATE_PSW;
+											exe_state <= P2;
+										
+										when P2	=>
+											RAM_WR_BYTE_START(x"D0", PSW);
+											exe_state <= P1;
+											cpu_state <= S6;
+											
+										when others =>
+									end case; -- end case exe state
+								when S6 =>
+									case exe_state is
+										when P1	=>  
+											RAM_STOP;
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S1;
+											machine_cycle <= M1;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when others =>
+							end case; -- end case cpu state
+							
+						when others =>
+					end case; -- end case machine cycle
+	
+				-- ADDC A, #data
+				-- 2 bytes, 1 cycle
+				-- Author: Tran Phuoc Dang Khoa
+				-- Status: Simulated
+				when "00110101" =>
+					case machine_cycle is
+						when M1 =>
+							case cpu_state is
+								when S2 =>
+									case exe_state is
+										when P1	=>
+											RAM_RD_BYTE_START(x"D0");
+											exe_state <= P2;
+										
+										when P2	=>
+											RAM_RD_BYTE_START(x"E0");
+											PSW <= i_ram_doByte;
+											exe_state <= P1;
+											cpu_state <= S3;
+											
+										when others =>
+									end case; -- end case exe state
+								
+								when S3 =>
+									case exe_state is
+										when P1	=>
+											ACC <= i_ram_doByte;
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S4;
+											
+										when others =>
+									end case; -- end case exe state
+								when S4 => 
+									case exe_state is
+										when P1	=>  
+											ROM_RD_START(PC);
+											exe_state <= P2;
+										
+										when P2	=>
+											PC <= PC + 1;
+											DR <= i_rom_data;
+											ROM_STOP;
+											exe_state <= P1;
+											cpu_state <= S5;
+											
+										when others =>
+									end case; -- end case exe state
+								when S5 =>
+									case exe_state is
+										when P1	=> 
+											alu_src_1L <= ACC;
+											alu_src_2L <= DR;
+											alu_op_code <= ALU_OPC_ADC;
+											alu_by_wd <= '0';
+											alu_cy_bw <= PSW(7);
+											exe_state <= P2;
+										
+										when P2	=>
+											RAM_WR_BYTE_START(x"E0", alu_ans_L);
+											UPDATE_PSW;
+											exe_state <= P1;
+											cpu_state <= S6;
+											
+										when others =>
+									end case; -- end case exe state
+								when S6 =>
+									case exe_state is
+										when P1	=>  
+											RAM_WR_BYTE_START(x"D0", PSW);
+											exe_state <= P2;
+										
+										when P2	=>
+											RAM_STOP;
+											exe_state <= P1;
+											cpu_state <= S1;
+											machine_cycle <= M1;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when others =>
+							end case; -- end case cpu state
+							
+						when others =>
+					end case; -- end case machine cycle
+
+				-- SUBB A,Rn
+				-- 1 byte, 1 cycle
+				-- Author: Gaurav Chandrashekar
+				-- Status: Simulated
+				when  "10011000" |
+						"10011001" |
+						"10011010" |
+						"10011011" |
+						"10011100" |
+						"10011101" |
+						"10011110" |
+						"10011111" =>
+					case machine_cycle is
+						when M1 =>
+							case cpu_state is
+								when S2 =>
+									case exe_state is
+										when P1	=>
+											RAM_RD_BYTE_START(x"D0");
+											exe_state <= P2;
+										
+										when P2	=>
+											RAM_RD_BYTE_START("000" & i_ram_doByte(4 downto 3) & IR(2 downto 0));
+											PSW <= i_ram_doByte;
+											exe_state <= P1;
+											cpu_state <= S3;
+											
+										when others =>
+									end case; -- end case exe state
+								
+								when S3 =>
+									case exe_state is
+										when P1	=>
+											RAM_RD_BYTE_START(x"E0");
+											DR <= i_ram_doByte;
+											exe_state <= P2;
+										
+										when P2	=>
+											alu_src_1L <= i_ram_doByte;
+											alu_src_2L <= DR;
+											alu_op_code <= ALU_OPC_SBB;
+											alu_by_wd <= '0';
+											alu_cy_bw <= PSW(7);
+											exe_state <= P1;
+											cpu_state <= S4;
+											
+										when others =>
+									end case; -- end case exe state
+								when S4 => -- 1 byte instruction, do nothing here
+									case exe_state is
+										when P1	=>  
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S5;
+											
+										when others =>
+									end case; -- end case exe state
+								when S5 =>
+									case exe_state is
+										when P1	=> 
+											RAM_WR_BYTE_START(x"E0", alu_ans_L);
+											UPDATE_PSW;
+											exe_state <= P2;
+										
+										when P2	=>
+											RAM_WR_BYTE_START(x"D0", PSW);
+											exe_state <= P1;
+											cpu_state <= S6;
+											
+										when others =>
+									end case; -- end case exe state
+								when S6 =>
+									case exe_state is
+										when P1	=>  
+											RAM_STOP;
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S1;
+											machine_cycle <= M1;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when others =>
+							end case; -- end case cpu state
+							
+						when others =>
+					end case; -- end case machine cycle
+
+				-- SUBB A, direct
+				-- 2 bytes, 1 cycle
+				-- Author: Gaurav Chandrashekar
+				-- Status: Simulated
+				when "10010101" =>
+					case machine_cycle is
+						when M1 =>
+							case cpu_state is
+								when S2 =>
+									case exe_state is
+										when P1	=>
+											RAM_RD_BYTE_START(x"D0");
+											exe_state <= P2;
+										
+										when P2	=>
+											RAM_RD_BYTE_START(x"E0");
+											PSW <= i_ram_doByte;
+											exe_state <= P1;
+											cpu_state <= S3;
+											
+										when others =>
+									end case; -- end case exe state
+								
+								when S3 =>
+									case exe_state is
+										when P1	=>
+											ACC <= i_ram_doByte;
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S4;
+											
+										when others =>
+									end case; -- end case exe state
+								when S4 => 
+									case exe_state is
+										when P1	=>  
+											ROM_RD_START(PC);
+											exe_state <= P2;
+										
+										when P2	=>
+											PC <= PC + 1;
+											RAM_RD_BYTE_START(i_rom_data);
+											ROM_STOP;
+											exe_state <= P1;
+											cpu_state <= S5;
+											
+										when others =>
+									end case; -- end case exe state
+								when S5 =>
+									case exe_state is
+										when P1	=> 
+											alu_src_1L <= ACC;
+											alu_src_2L <= i_ram_doByte;
+											alu_op_code <= ALU_OPC_SBB;
+											alu_by_wd <= '0';
+											alu_cy_bw <= PSW(7);
+											exe_state <= P2;
+										
+										when P2	=>
+											RAM_WR_BYTE_START(x"E0", alu_ans_L);
+											UPDATE_PSW;
+											exe_state <= P1;
+											cpu_state <= S6;
+											
+										when others =>
+									end case; -- end case exe state
+								when S6 =>
+									case exe_state is
+										when P1	=>  
+											RAM_WR_BYTE_START(x"D0", PSW);
+											exe_state <= P2;
+										
+										when P2	=>
+											RAM_STOP;
+											exe_state <= P1;
+											cpu_state <= S1;
+											machine_cycle <= M1;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when others =>
+							end case; -- end case cpu state
+							
+						when others =>
+					end case; -- end case machine cycle
+
+
+				-- SUBB A,@Ri
+				-- 1 byte, 1 cycle
+				-- Author: Gaurav Chandrashekar
+				-- Status: Simulated
+				when  "10010110" | "10010111" =>
+					case machine_cycle is
+						when M1 =>
+							case cpu_state is
+								when S2 =>
+									case exe_state is
+										when P1	=>
+											RAM_RD_BYTE_START(x"D0");
+											exe_state <= P2;
+										
+										when P2	=>
+											RAM_RD_BYTE_START("000" & i_ram_doByte(4 downto 3) & "00" & IR(0));
+											PSW <= i_ram_doByte;
+											exe_state <= P1;
+											cpu_state <= S3;
+											
+										when others =>
+									end case; -- end case exe state
+								
+								when S3 =>
+									case exe_state is
+										when P1	=>
+											RAM_RD_BYTE_START(x"E0");
+											DR <= i_ram_doByte;
+											exe_state <= P2;
+										
+										when P2	=>
+											alu_src_1L <= i_ram_doByte;
+											alu_src_2L <= DR;
+											alu_op_code <= ALU_OPC_SBB;
+											alu_by_wd <= '0';
+											alu_cy_bw <= PSW(7);
+											exe_state <= P1;
+											cpu_state <= S4;
+											
+										when others =>
+									end case; -- end case exe state
+								when S4 => -- 1 byte instruction, do nothing here
+									case exe_state is
+										when P1	=>  
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S5;
+											
+										when others =>
+									end case; -- end case exe state
+								when S5 =>
+									case exe_state is
+										when P1	=> 
+											RAM_WR_BYTE_START(x"E0", alu_ans_L);
+											UPDATE_PSW;
+											exe_state <= P2;
+										
+										when P2	=>
+											RAM_WR_BYTE_START(x"D0", PSW);
+											exe_state <= P1;
+											cpu_state <= S6;
+											
+										when others =>
+									end case; -- end case exe state
+								when S6 =>
+									case exe_state is
+										when P1	=>  
+											RAM_STOP;
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S1;
+											machine_cycle <= M1;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when others =>
+							end case; -- end case cpu state
+							
+						when others =>
+					end case; -- end case machine cycle
+	
+				-- SUBB A, #data
+				-- 2 bytes, 1 cycle
+				-- Author: Tran Phuoc Dang Khoa
+				-- Status: Simulated
+				when "10010100" =>
+					case machine_cycle is
+						when M1 =>
+							case cpu_state is
+								when S2 =>
+									case exe_state is
+										when P1	=>
+											RAM_RD_BYTE_START(x"D0");
+											exe_state <= P2;
+										
+										when P2	=>
+											RAM_RD_BYTE_START(x"E0");
+											PSW <= i_ram_doByte;
+											exe_state <= P1;
+											cpu_state <= S3;
+											
+										when others =>
+									end case; -- end case exe state
+								
+								when S3 =>
+									case exe_state is
+										when P1	=>
+											ACC <= i_ram_doByte;
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S4;
+											
+										when others =>
+									end case; -- end case exe state
+								when S4 => 
+									case exe_state is
+										when P1	=>  
+											ROM_RD_START(PC);
+											exe_state <= P2;
+										
+										when P2	=>
+											PC <= PC + 1;
+											DR <= i_rom_data;
+											ROM_STOP;
+											exe_state <= P1;
+											cpu_state <= S5;
+											
+										when others =>
+									end case; -- end case exe state
+								when S5 =>
+									case exe_state is
+										when P1	=> 
+											alu_src_1L <= ACC;
+											alu_src_2L <= DR;
+											alu_op_code <= ALU_OPC_SBB;
+											alu_by_wd <= '0';
+											alu_cy_bw <= PSW(7);
+											exe_state <= P2;
+										
+										when P2	=>
+											RAM_WR_BYTE_START(x"E0", alu_ans_L);
+											UPDATE_PSW;
+											exe_state <= P1;
+											cpu_state <= S6;
+											
+										when others =>
+									end case; -- end case exe state
+								when S6 =>
+									case exe_state is
+										when P1	=>  
+											RAM_WR_BYTE_START(x"D0", PSW);
+											exe_state <= P2;
+										
+										when P2	=>
+											RAM_STOP;
+											exe_state <= P1;
+											cpu_state <= S1;
+											machine_cycle <= M1;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when others =>
+							end case; -- end case cpu state
+							
+						when others =>
+					end case; -- end case machine cycle
+
 				-- MOV A, Rn
 				-- 1 byte, 1 cycle
 				-- Author: Tran Phuoc Dang Khoa

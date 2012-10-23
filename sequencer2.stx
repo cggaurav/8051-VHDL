@@ -1,36 +1,39 @@
 Release 13.2 - xst O.61xd (nt)
 Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.
---> Parameter TMPDIR set to D:/Myproject/xst/projnav.tmp
+--> Parameter TMPDIR set to C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/xst/projnav.tmp
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.40 secs
+Total CPU time to Xst completion: 0.46 secs
  
---> Parameter xsthdpdir set to D:/Myproject/xst
+--> Parameter xsthdpdir set to C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.41 secs
+Total CPU time to Xst completion: 0.46 secs
  
 --> WARNING:Xst:3164 - Option "-debug" found multiple times in the command line. Only the first occurence is considered.
 
 =========================================================================
 *                          HDL Compilation                              *
 =========================================================================
-Compiling vhdl file "D:/Myproject/constants.vhd" in Library work.
-Compiling vhdl file "D:/Myproject/sequencer2 .vhd" in Library work.
+WARNING:HDLParsers:3607 - Unit work/sequencer2 is now defined in a different file.  It was defined in "D:/Myproject/sequencer2 .vhd", and is now defined in "C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/sequencer2 .vhd".
+WARNING:HDLParsers:3607 - Unit work/sequencer2/seq_arch is now defined in a different file.  It was defined in "D:/Myproject/sequencer2 .vhd", and is now defined in "C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/sequencer2 .vhd".
+WARNING:HDLParsers:3607 - Unit work/constants is now defined in a different file.  It was defined in "D:/Myproject/constants.vhd", and is now defined in "C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/constants.vhd".
+Compiling vhdl file "C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/constants.vhd" in Library work.
+Compiling vhdl file "C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/sequencer2 .vhd" in Library work.
 Entity <sequencer2> compiled.
-Entity <sequencer2> (Architecture <seq_arch>) compiled.
+ERROR:HDLParsers:811 - "C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/sequencer2 .vhd" Line 903. Choice 00110101 duplicated in case.
 
 
 Total REAL time to Xst completion: 1.00 secs
-Total CPU time to Xst completion: 0.83 secs
+Total CPU time to Xst completion: 0.70 secs
  
 --> 
 
-Total memory usage is 159156 kilobytes
+Total memory usage is 162504 kilobytes
 
-Number of errors   :    0 (   0 filtered)
-Number of warnings :    1 (   0 filtered)
+Number of errors   :    1 (   0 filtered)
+Number of warnings :    4 (   0 filtered)
 Number of infos    :    0 (   0 filtered)
 

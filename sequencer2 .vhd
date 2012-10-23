@@ -900,7 +900,7 @@ begin
 				-- 2 bytes, 1 cycle
 				-- Author: Tran Phuoc Dang Khoa
 				-- Status: Simulated
-				when "00110101" =>
+				when "00110100" =>
 					case machine_cycle is
 						when M1 =>
 							case cpu_state is

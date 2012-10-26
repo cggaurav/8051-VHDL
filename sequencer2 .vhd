@@ -3227,6 +3227,663 @@ begin
 							
 						when others =>
 					end case; -- end case machine cycle
+				
+				-- ANL C, bit
+				-- 2 bytes, 2 cycles
+				-- Author: Gaurav Chandrashekar
+				-- Status: Simulated
+				when  "10000010"  =>
+					case machine_cycle is
+						when M1 =>
+							case cpu_state is
+								when S2 =>
+									case exe_state is
+										when P1	=>
+											RAM_RD_BYTE_START(x"D0");
+											exe_state <= P2;
+										
+										when P2	=>
+											PSW <= i_ram_doByte;
+											exe_state <= P1;
+											cpu_state <= S3;
+											
+										when others =>
+									end case; -- end case exe state
+								
+								when S3 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S4;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S4 =>
+									case exe_state is
+										when P1	=>  
+											ROM_RD_START(PC);
+											exe_state <= P2;
+										
+										when P2	=>
+											PC <= PC + 1;
+											AR <= i_rom_data;
+											ROM_STOP;
+											exe_state <= P1;
+											cpu_state <= S5;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S5 =>
+									case exe_state is
+										when P1	=> 
+											RAM_RD_BIT_START(AR);
+											exe_state <= P2;
+										
+										when P2	=>
+--											DR <= i_ram_doBit;
+											exe_state <= P1;
+											cpu_state <= S6;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S6 =>
+									case exe_state is
+										when P1	=>  
+											RAM_WR_BIT_START(AR,PSW(7) and i_ram_doBit);
+											-- RAM_WR_BIT_START(AR,PSW(7) and DR);
+											exe_state <= P2;
+										
+										when P2	=>
+										   	RAM_STOP;
+											exe_state <= P1;
+											cpu_state <= S1;
+											machine_cycle <= M2; -- this is 2 cylces instruction
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when others =>
+							end case; -- end case cpu state
+							
+						when M2 =>
+							case cpu_state is
+								when S1 =>
+									case exe_state is
+										when P1 =>
+											exe_state <= P2;
+											
+										when P2 =>
+											exe_state <= P1;
+											cpu_state <= S2;
+											
+										when others =>
+									end case;
+									
+								when S2 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S3;
+											
+										when others =>
+									end case; -- end case exe state
+								
+								when S3 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S4;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S4 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S5;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S5 =>
+									case exe_state is
+										when P1	=> 
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S6;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S6 =>
+									case exe_state is
+										when P1	=> 
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S1;
+											machine_cycle <= M1; -- end 2 cycles instruction, back to M1
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when others =>
+							end case; -- end case cpu state
+							
+						when others =>
+					end case; -- end case machine cycle
+					
+				-- ANL C, /bit
+				-- 2 bytes, 2 cycles
+				-- Author: Gaurav Chandrashekar
+				-- Status: Simulated
+				when  "10110000"  =>
+					case machine_cycle is
+						when M1 =>
+							case cpu_state is
+								when S2 =>
+									case exe_state is
+										when P1	=>
+											RAM_RD_BYTE_START(x"D0");
+											exe_state <= P2;
+										
+										when P2	=>
+											PSW <= i_ram_doByte;
+											exe_state <= P1;
+											cpu_state <= S3;
+											
+										when others =>
+									end case; -- end case exe state
+								
+								when S3 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S4;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S4 =>
+									case exe_state is
+										when P1	=>  
+											ROM_RD_START(PC);
+											exe_state <= P2;
+										
+										when P2	=>
+											PC <= PC + 1;
+											AR <= i_rom_data;
+											ROM_STOP;
+											exe_state <= P1;
+											cpu_state <= S5;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S5 =>
+									case exe_state is
+										when P1	=> 
+											RAM_RD_BIT_START(AR);
+											exe_state <= P2;
+										
+										when P2	=>
+--											DR <= i_ram_doBit;
+											exe_state <= P1;
+											cpu_state <= S6;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S6 =>
+									case exe_state is
+										when P1	=>  
+											RAM_WR_BIT_START(AR,PSW(7) and not i_ram_doBit);
+											-- RAM_WR_BIT_START(AR,PSW(7) and DR);
+											exe_state <= P2;
+										
+										when P2	=>
+										   	RAM_STOP;
+											exe_state <= P1;
+											cpu_state <= S1;
+											machine_cycle <= M2; -- this is 2 cylces instruction
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when others =>
+							end case; -- end case cpu state
+							
+						when M2 =>
+							case cpu_state is
+								when S1 =>
+									case exe_state is
+										when P1 =>
+											exe_state <= P2;
+											
+										when P2 =>
+											exe_state <= P1;
+											cpu_state <= S2;
+											
+										when others =>
+									end case;
+									
+								when S2 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S3;
+											
+										when others =>
+									end case; -- end case exe state
+								
+								when S3 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S4;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S4 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S5;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S5 =>
+									case exe_state is
+										when P1	=> 
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S6;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S6 =>
+									case exe_state is
+										when P1	=> 
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S1;
+											machine_cycle <= M1; -- end 2 cycles instruction, back to M1
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when others =>
+							end case; -- end case cpu state
+							
+						when others =>
+					end case; -- end case machine cycle
+
+				-- ORL C, bit
+				-- 2 bytes, 2 cycles
+				-- Author: Gaurav Chandrashekar
+				-- Status: Simulated
+				when  "01110010"  =>
+					case machine_cycle is
+						when M1 =>
+							case cpu_state is
+								when S2 =>
+									case exe_state is
+										when P1	=>
+											RAM_RD_BYTE_START(x"D0");
+											exe_state <= P2;
+										
+										when P2	=>
+											PSW <= i_ram_doByte;
+											exe_state <= P1;
+											cpu_state <= S3;
+											
+										when others =>
+									end case; -- end case exe state
+								
+								when S3 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S4;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S4 =>
+									case exe_state is
+										when P1	=>  
+											ROM_RD_START(PC);
+											exe_state <= P2;
+										
+										when P2	=>
+											PC <= PC + 1;
+											AR <= i_rom_data;
+											ROM_STOP;
+											exe_state <= P1;
+											cpu_state <= S5;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S5 =>
+									case exe_state is
+										when P1	=> 
+											RAM_RD_BIT_START(AR);
+											exe_state <= P2;
+										
+										when P2	=>
+--											DR <= i_ram_doBit;
+											exe_state <= P1;
+											cpu_state <= S6;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S6 =>
+									case exe_state is
+										when P1	=>  
+											RAM_WR_BIT_START(AR,PSW(7) or i_ram_doBit);
+											-- RAM_WR_BIT_START(AR,PSW(7) and DR);
+											exe_state <= P2;
+										
+										when P2	=>
+										   	RAM_STOP;
+											exe_state <= P1;
+											cpu_state <= S1;
+											machine_cycle <= M2; -- this is 2 cylces instruction
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when others =>
+							end case; -- end case cpu state
+							
+						when M2 =>
+							case cpu_state is
+								when S1 =>
+									case exe_state is
+										when P1 =>
+											exe_state <= P2;
+											
+										when P2 =>
+											exe_state <= P1;
+											cpu_state <= S2;
+											
+										when others =>
+									end case;
+									
+								when S2 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S3;
+											
+										when others =>
+									end case; -- end case exe state
+								
+								when S3 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S4;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S4 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S5;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S5 =>
+									case exe_state is
+										when P1	=> 
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S6;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S6 =>
+									case exe_state is
+										when P1	=> 
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S1;
+											machine_cycle <= M1; -- end 2 cycles instruction, back to M1
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when others =>
+							end case; -- end case cpu state
+							
+						when others =>
+					end case; -- end case machine cycle
+				
+				-- ORL C, /bit
+				-- 2 bytes, 2 cycles
+				-- Author: Gaurav Chandrashekar
+				-- Status: Simulated
+				when  "10100000"  =>
+					case machine_cycle is
+						when M1 =>
+							case cpu_state is
+								when S2 =>
+									case exe_state is
+										when P1	=>
+											RAM_RD_BYTE_START(x"D0");
+											exe_state <= P2;
+										
+										when P2	=>
+											PSW <= i_ram_doByte;
+											exe_state <= P1;
+											cpu_state <= S3;
+											
+										when others =>
+									end case; -- end case exe state
+								
+								when S3 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S4;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S4 =>
+									case exe_state is
+										when P1	=>  
+											ROM_RD_START(PC);
+											exe_state <= P2;
+										
+										when P2	=>
+											PC <= PC + 1;
+											AR <= i_rom_data;
+											ROM_STOP;
+											exe_state <= P1;
+											cpu_state <= S5;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S5 =>
+									case exe_state is
+										when P1	=> 
+											RAM_RD_BIT_START(AR);
+											exe_state <= P2;
+										
+										when P2	=>
+--											DR <= i_ram_doBit;
+											exe_state <= P1;
+											cpu_state <= S6;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S6 =>
+									case exe_state is
+										when P1	=>  
+											RAM_WR_BIT_START(AR,PSW(7) or not i_ram_doBit);
+											-- RAM_WR_BIT_START(AR,PSW(7) and DR);
+											exe_state <= P2;
+										
+										when P2	=>
+										   	RAM_STOP;
+											exe_state <= P1;
+											cpu_state <= S1;
+											machine_cycle <= M2; -- this is 2 cylces instruction
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when others =>
+							end case; -- end case cpu state
+							
+						when M2 =>
+							case cpu_state is
+								when S1 =>
+									case exe_state is
+										when P1 =>
+											exe_state <= P2;
+											
+										when P2 =>
+											exe_state <= P1;
+											cpu_state <= S2;
+											
+										when others =>
+									end case;
+									
+								when S2 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S3;
+											
+										when others =>
+									end case; -- end case exe state
+								
+								when S3 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S4;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S4 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S5;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S5 =>
+									case exe_state is
+										when P1	=> 
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S6;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S6 =>
+									case exe_state is
+										when P1	=> 
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S1;
+											machine_cycle <= M1; -- end 2 cycles instruction, back to M1
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when others =>
+							end case; -- end case cpu state
+							
+						when others =>
+					end case; -- end case machine cycle
+
 				-- MOV A, Rn
 				-- 1 byte, 1 cycle
 				-- Author: Tran Phuoc Dang Khoa

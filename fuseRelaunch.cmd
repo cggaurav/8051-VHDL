@@ -1,1 +1,1 @@
--intstyle "ise" -incremental -o "D:/Myproject/test_isim_beh.exe" -prj "D:/Myproject/test_beh.prj" "work.test" 
+-intstyle "ise" -incremental -o "C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/test_isim_beh.exe" -prj "C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/test_beh.prj" "work.test" 

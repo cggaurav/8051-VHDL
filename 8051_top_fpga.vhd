@@ -7,9 +7,9 @@ entity i8051_top is
 port (
         	clk          : in  std_logic;
         	rst          : in  std_logic;
-		ale		 : out std_logic;
-		psen		 : out std_logic;
-		ea		 : in  std_logic;
+			ale		 : out std_logic;
+			psen		 : out std_logic;
+			ea		 : in  std_logic;
         	p0_in        : in  std_logic_vector (7 downto 0);
         	p0_out       : out std_logic_vector (7 downto 0);
         	p1_in        : in  std_logic_vector (7 downto 0);
@@ -64,8 +64,8 @@ architecture Behavioral of i8051_top is
 		i_ram_doByte   	: in std_logic_vector(7 downto 0); 
 		i_ram_doBit   	: in std_logic; 
 		
-	    	i_rom_addr        : out std_logic_vector (15 downto 0);
-	    	i_rom_data        : in  std_logic_vector (7 downto 0);
+	   i_rom_addr        : out std_logic_vector (15 downto 0);
+	   i_rom_data        : in  std_logic_vector (7 downto 0);
 		i_rom_rd          : out std_logic;
 		
 		pc_debug	 	: out std_logic_vector (15 downto 0);
@@ -233,10 +233,10 @@ signal counter2 		: std_logic_vector(1 downto 0) ;
 begin
 
 	rst_bar <= not rst;
-	p0_out <= not p0_out_bar;
-	p1_out <= not p1_out_bar;
-	p2_out <= not p2_out_bar;
-	p3_out <= not p3_out_bar;
+	p0_out <= p0_out_bar;
+	p1_out <= p1_out_bar;
+	p2_out <= p2_out_bar;
+	p3_out <= p3_out_bar;
 	process (clk,clk_div,counter2) 
 		begin
 		if( rst = '0' ) then
@@ -244,9 +244,9 @@ begin
 			clk_div <= '0';
 	    	elsif clk='1' and clk'event then
 	      counter2 <= counter2+1;
-			if counter2 = "11" then
+--			if counter2 = "11" then
 	      	clk_div <= not clk_div;
-			end if;
+--			end if;
 	    end if;
 	end process;
 

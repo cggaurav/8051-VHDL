@@ -21,7 +21,7 @@
 #include <malloc.h>
 #define alloca _alloca
 #endif
-static const char *ng0 = "D:/Myproject/multiplier.vhd";
+static const char *ng0 = "C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/multiplier.vhd";
 extern char *IEEE_P_3499444699;
 
 char *ieee_p_3499444699_sub_1704181104_3536714472(char *, char *, char *, char *, char *, char *);
@@ -46,10 +46,10 @@ static void work_a_1656347969_1516540902_p_0(char *t0)
 LAB0:    xsi_set_current_line(22, ng0);
     t3 = (t0 + 684U);
     t4 = *((char **)t3);
-    t3 = (t0 + 3356U);
+    t3 = (t0 + 3732U);
     t5 = (t0 + 776U);
     t6 = *((char **)t5);
-    t5 = (t0 + 3372U);
+    t5 = (t0 + 3748U);
     t7 = ieee_p_3499444699_sub_1704181104_3536714472(IEEE_P_3499444699, t2, t4, t3, t6, t5);
     t8 = (16 * 2);
     t9 = ieee_std_logic_arith_conv_unsigned_zeroext(IEEE_P_3499444699, t1, t7, t2, t8);

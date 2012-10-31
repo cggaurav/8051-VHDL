@@ -7,8 +7,8 @@ entity sequencer2 is
     port(
 		rst                : in  std_logic;
 		clk              	 : in  std_logic;
-		ale		  	 : out std_logic;
-		psen		 	 : out std_logic;
+		ale		  	 		 : out std_logic;
+		psen		 	 		 : out std_logic;
 		
 		alu_op_code	 	 : out  std_logic_vector (3 downto 0);
 		alu_src_1L		 : out  std_logic_vector (7 downto 0);

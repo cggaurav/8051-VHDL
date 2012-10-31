@@ -2,28 +2,30 @@ Command line:
    test_isim_beh.exe
      -simmode  gui
      -simrunnum  0
-     -socket  57692
+     -socket  49198
 
-Tue Oct 23 22:43:53 2012
+Sat Oct 27 16:28:11 2012
 
 
- Elaboration Time: 0.0312 sec
+ Elaboration Time: 0.040058 sec
 
- Current Memory Usage: 949.563 Meg
+ Current Memory Usage: 487.567 Meg
 
- Total Signals          : 271
- Total Nets             : 1926
- Total Signal Drivers   : 189
+ Total Signals          : 272
+ Total Nets             : 1934
+ Total Signal Drivers   : 192
  Total Blocks           : 17
  Total Primitive Blocks : 13
- Total Processes        : 105
+ Total Processes        : 106
  Total Traceable Variables  : 48
- Total Scalar Nets and Variables : 35292
-Total Line Count : 2053
+ Total Scalar Nets and Variables : 35300
+In process sequencer2 .vhd:82 
+ Target Size 16 and source size 24 for array dimension 0 does not match. 
 
- Total Simulation Time: 0.530403 sec
 
- Current Memory Usage: 949.563 Meg
+ Total Simulation Time: 3.97572 sec
 
-Tue Oct 23 22:47:46 2012
+ Current Memory Usage: 488.616 Meg
+
+Sat Oct 27 16:36:49 2012
 

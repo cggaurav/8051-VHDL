@@ -82,6 +82,7 @@ ARCHITECTURE behavior OF test IS
  
 BEGIN
  
+	p1_in <= p1_out;
 	-- Instantiate the Unit Under Test (UUT)
    uut: i8051_top PORT MAP (
           clk => clk,
@@ -119,6 +120,14 @@ BEGIN
       --wait for clk_period*10;
 		rst <= '1';
       -- insert stimulus here 
+		
+		wait for 100 ns;
+		
+		p1_in <= "00000000";
+		
+		wait for 100 ns;
+		p1_in <= "00000001";
+		wait for 100 ns;
 
       wait;
    end process;

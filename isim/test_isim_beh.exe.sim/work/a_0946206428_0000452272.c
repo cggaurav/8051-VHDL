@@ -21,7 +21,7 @@
 #include <malloc.h>
 #define alloca _alloca
 #endif
-static const char *ng0 = "D:/Myproject/int_ram.vhd";
+static const char *ng0 = "C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/int_ram.vhd";
 extern char *IEEE_P_3620187407;
 extern char *IEEE_P_2592010699;
 
@@ -126,9 +126,9 @@ LAB3:    t1 = (t0 + 2460);
 
 LAB1:    return;
 LAB2:    xsi_set_current_line(34, ng0);
-    t1 = (t0 + 5271);
+    t1 = (t0 + 5783);
     *((int *)t1) = 0;
-    t5 = (t0 + 5275);
+    t5 = (t0 + 5787);
     *((int *)t5) = 127;
     t6 = 0;
     t7 = 127;
@@ -137,7 +137,7 @@ LAB5:    if (t6 <= t7)
         goto LAB6;
 
 LAB8:    xsi_set_current_line(37, ng0);
-    t1 = (t0 + 5287);
+    t1 = (t0 + 5799);
     t5 = (t0 + 2540);
     t8 = (t5 + 32U);
     t9 = *((char **)t8);
@@ -154,7 +154,7 @@ LAB8:    xsi_set_current_line(37, ng0);
     *((unsigned char *)t9) = (unsigned char)4;
     xsi_driver_first_trans_fast_port(t1);
     xsi_set_current_line(40, ng0);
-    t1 = (t0 + 5295);
+    t1 = (t0 + 5807);
     t3 = (8U != 8U);
     if (t3 == 1)
         goto LAB12;
@@ -169,12 +169,12 @@ LAB13:    t5 = (t0 + 2504);
     goto LAB3;
 
 LAB6:    xsi_set_current_line(35, ng0);
-    t8 = (t0 + 5279);
+    t8 = (t0 + 5791);
     t10 = (8U != 8U);
     if (t10 == 1)
         goto LAB9;
 
-LAB10:    t11 = (t0 + 5271);
+LAB10:    t11 = (t0 + 5783);
     t12 = *((int *)t11);
     t13 = (t12 - 127);
     t14 = (t13 * -1);
@@ -188,16 +188,16 @@ LAB10:    t11 = (t0 + 5271);
     memcpy(t21, t8, 8U);
     xsi_driver_first_trans_delta(t17, t16, 8U, 0LL);
 
-LAB7:    t1 = (t0 + 5271);
+LAB7:    t1 = (t0 + 5783);
     t6 = *((int *)t1);
-    t2 = (t0 + 5275);
+    t2 = (t0 + 5787);
     t7 = *((int *)t2);
     if (t6 == t7)
         goto LAB8;
 
 LAB11:    t12 = (t6 + 1);
     t6 = t12;
-    t5 = (t0 + 5271);
+    t5 = (t0 + 5783);
     *((int *)t5) = t6;
     goto LAB5;
 
@@ -221,7 +221,7 @@ LAB14:    xsi_set_current_line(43, ng0);
         goto LAB16;
 
 LAB18:    xsi_set_current_line(46, ng0);
-    t1 = (t0 + 5303);
+    t1 = (t0 + 5815);
     t5 = (t0 + 2540);
     t8 = (t5 + 32U);
     t9 = *((char **)t8);
@@ -319,7 +319,7 @@ LAB21:    xsi_set_current_line(51, ng0);
     t27 = (t13 * -1);
     xsi_vhdl_check_range_of_index(7, 0, -1, t12);
     t28 = (1U * t27);
-    t18 = (t0 + 5311);
+    t18 = (t0 + 5823);
     t20 = (t0 + 1144U);
     t21 = *((char **)t20);
     t29 = (7 - 6);
@@ -458,7 +458,7 @@ LAB35:    xsi_set_current_line(62, ng0);
     t8 = (t0 + 1328U);
     t9 = *((char **)t8);
     t54 = *((unsigned char *)t9);
-    t8 = (t0 + 5315);
+    t8 = (t0 + 5827);
     t17 = (t0 + 1144U);
     t18 = *((char **)t17);
     t23 = (7 - 6);

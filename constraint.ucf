@@ -1,0 +1,6 @@
+NET "clk" LOC = "C10"; #Clock is 16 MHz
+NET "rst" LOC = "L3"; #Mapping rst to EF3 FPGA_PUSH_C
+NET "p1_in<0>" LOC = "H5"; #Mapping Pin 0 of Port 1 to EF2
+FPGA_PUSH_B
+NET "p2_out<0>" LOC = "C16"; #Mapping Pin 0 of Port 2 to
+LED2(D4)

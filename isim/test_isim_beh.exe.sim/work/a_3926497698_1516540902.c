@@ -21,7 +21,7 @@
 #include <malloc.h>
 #define alloca _alloca
 #endif
-static const char *ng0 = "D:/Myproject/divider.vhd";
+static const char *ng0 = "C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/divider.vhd";
 extern char *IEEE_P_2592010699;
 extern char *IEEE_P_3499444699;
 
@@ -153,10 +153,10 @@ LAB2:    xsi_set_current_line(49, ng0);
     xsi_set_current_line(50, ng0);
     t1 = (t0 + 2304U);
     t2 = *((char **)t1);
-    t1 = (t0 + 5644U);
+    t1 = (t0 + 6424U);
     t3 = (t0 + 1512U);
     t7 = *((char **)t3);
-    t3 = (t0 + 5516U);
+    t3 = (t0 + 6296U);
     t14 = ieee_p_3499444699_sub_2254183471_3536714472(IEEE_P_3499444699, t16, t2, t1, t7, t3);
     t17 = ieee_p_3499444699_sub_2930370427_3536714472(IEEE_P_3499444699, t15, t14, t16, 16);
     t18 = (t0 + 2304U);

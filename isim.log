@@ -1,10 +1,14 @@
 ISim log file
-Running: D:\Myproject\test_isim_beh.exe -intstyle ise -gui -tclbatch isim.cmd -wdb D:/Myproject/test_isim_beh.wdb 
+Running: C:\Users\cggauravVB\Documents\CG3207\8051-VHDL\test_isim_beh.exe -intstyle ise -gui -tclbatch isim.cmd -wdb C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/test_isim_beh.wdb 
 ISim O.61xd (signature 0x6dd86d03)
-WARNING: A WEBPACK license was found.
-WARNING: Please use Xilinx License Configuration Manager to check out a full ISim license.
-WARNING: ISim will run in Lite mode. Please refer to the ISim documentation for more information on the differences between the Lite and the Full version.
-This is a Lite version of ISim.
+----------------------------------------------------------------------
+INFO:Security:65 - Your license for 'ISIM' is for trial use only.
+WARNING:Security:40 - Your license for 'ISIM' expires in 3 days.
+WARNING:Security:42 - Your software subscription period has lapsed. Your current version of Xilinx tools will continue to function, but you no longer qualify for Xilinx software updates or new releases.
+
+
+----------------------------------------------------------------------
+This is a Full version of ISim.
 Time resolution is 1 ps
 # onerror resume
 # wave add /
@@ -13,14 +17,10 @@ Simulator is doing circuit initialization process.
 at 0 ps, Instance /test/uut/MUL/ : Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 at 0 ps, Instance /test/uut/DIV/ : Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 Finished circuit initialization process.
-ISim O.61xd (signature 0x6dd86d03)
-WARNING: A WEBPACK license was found.
-WARNING: Please use Xilinx License Configuration Manager to check out a full ISim license.
-WARNING: ISim will run in Lite mode. Please refer to the ISim documentation for more information on the differences between the Lite and the Full version.
-This is a Lite version of ISim.
+# run 1000ns
+ERROR: In process sequencer2 .vhd:82 
+ Target Size 16 and source size 24 for array dimension 0 does not match. 
+
+INFO: Simulator is stopped.
 # run 1000 ns
-Simulator is doing circuit initialization process.
-at 0 ps, Instance /test/uut/MUL/ : Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-at 0 ps, Instance /test/uut/DIV/ : Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-Finished circuit initialization process.
-# run 8000ns
+INFO: Simulator is stopped.

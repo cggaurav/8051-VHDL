@@ -1,0 +1,8 @@
+INTSTYLE=ise
+INFILE=C:\Users\cggauravVB\Documents\CG3207\8051-VHDL\i8051_top.ncd
+OUTFILE=C:\Users\cggauravVB\Documents\CG3207\8051-VHDL\i8051_top.bit
+FAMILY=Spartan3A and Spartan3AN
+PART=xc3s400a-4ft256
+WORKINGDIR=C:\Users\cggauravVB\Documents\CG3207\8051-VHDL
+LICENSE=WebPack
+USER_INFO=_0_0_1308636711_010

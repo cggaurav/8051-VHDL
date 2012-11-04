@@ -1972,6 +1972,667 @@ begin
 						when others =>
 					end case; -- end case machine cycle
 				
+
+				-- DIV AB
+				-- 1 byte, 4 cycle
+				-- Author : Gaurav Chandrashekar
+				-- Status : Simulated
+				when "10000100" =>
+					case machine_cycle is
+						when M1 =>
+							case cpu_state is
+								when S2 =>
+									case exe_state is
+										when P1	=>
+											RAM_RD_BYTE_START(x"D0");
+											exe_state <= P2;
+										
+										when P2	=>
+											PSW <= i_ram_doByte;
+											exe_state <= P1;
+											cpu_state <= S3;
+											
+										when others =>
+									end case; -- end case exe state
+								
+								when S3 =>
+									case exe_state is
+										when P1	=>
+											RAM_RD_BYTE_START(x"F0");
+											exe_state <= P2;
+										
+										when P2	=>
+											DR <= i_ram_doByte;
+											exe_state <= P1;
+											cpu_state <= S4;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S4 =>
+									case exe_state is
+										when P1	=>  
+											RAM_RD_BYTE_START(x"E0");
+											exe_state <= P2;
+										
+										when P2	=>
+											ACC <= i_ram_doByte;
+											exe_state <= P1;
+											cpu_state <= S5;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S5 =>
+									case exe_state is
+										when P1	=>
+											divisor_i <= "00000000" & DR; -- B
+											dividend_i <= "00000000" & ACC; -- ACC
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S6;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S6 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S1;
+											machine_cycle <= M2; -- this is 2 cylces instruction
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when others =>
+							end case; -- end case cpu state
+							
+						when M2 =>
+							case cpu_state is
+								when S1 =>
+									case exe_state is
+										when P1 =>
+											exe_state <= P2;
+											
+										when P2 =>
+											exe_state <= P1;
+											cpu_state <= S2;
+											
+										when others =>
+									end case;
+									
+								when S2 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S3;
+											
+										when others =>
+									end case; -- end case exe state
+								
+								when S3 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											RAM_STOP;
+											exe_state <= P1;
+											cpu_state <= S4;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S4 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S5;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S5 =>
+									case exe_state is
+										when P1	=> 
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S6;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S6 =>
+									case exe_state is
+										when P1	=> 
+											exe_state <= P2;
+										
+										when P2	=>
+											RAM_STOP;
+											exe_state <= P1;
+											cpu_state <= S1;
+											machine_cycle <= M3; 
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when others =>
+							end case; 
+							
+						when M3 =>
+							case cpu_state is
+								when S1 =>
+									case exe_state is
+										when P1 =>
+											exe_state <= P2;
+											
+										when P2 =>
+											exe_state <= P1;
+											cpu_state <= S2;
+											
+										when others =>
+									end case;
+									
+								when S2 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S3;
+											
+										when others =>
+									end case; -- end case exe state
+								
+								when S3 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S4;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S4 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S5;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S5 =>
+									case exe_state is
+										when P1	=> 
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S6;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S6 =>
+									case exe_state is
+										when P1	=> 
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S1;
+											machine_cycle <= M4; -- end 2 cycles instruction, back to M1
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when others =>
+							end case; 
+
+							when M4 =>
+							case cpu_state is
+								when S1 =>
+									case exe_state is
+										when P1 =>
+											exe_state <= P2;
+											
+										when P2 =>
+											exe_state <= P1;
+											cpu_state <= S2;
+											
+										when others =>
+									end case;
+									
+								when S2 =>
+									case exe_state is
+										when P1	=>
+											RAM_WR_BYTE_START(x"F0",remainder_o(7 downto 0));
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S3;
+											
+										when others =>
+									end case; -- end case exe state
+								
+								when S3 =>
+									case exe_state is
+										when P1	=>
+											RAM_WR_BYTE_START(x"E0", quotient_o(7 downto 0));
+											exe_state <= P2;
+										
+										when P2	=>
+											RAM_STOP;
+											exe_state <= P1;
+											cpu_state <= S4;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S4 =>
+									case exe_state is
+										when P1	=>
+											if DR = "00000000" then
+												PSW(7) <= '0';
+												PSW(2) <= '1';
+												RAM_WR_BYTE_START(x"D0",PSW);
+											else
+												PSW(7) <= '0';
+												PSW(2) <= '0';
+												RAM_WR_BYTE_START(x"D0",PSW);
+											end if;
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S5;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S5 =>
+									case exe_state is
+										when P1	=> 
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S6;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S6 =>
+									case exe_state is
+										when P1	=> 
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S1;
+											machine_cycle <= M1; -- end 2 cycles instruction, back to M1
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when others =>
+							end case; -- end case cpu state
+						when others =>
+					end case; -- end case machine cycle
+
+				-- MUL AB
+				-- 1 byte, 4 cycle
+				-- Author : Gaurav Chandrashekar
+				-- Status : Simulated
+				when "10100100" =>
+					case machine_cycle is
+						when M1 =>
+							case cpu_state is
+								when S2 =>
+									case exe_state is
+										when P1	=>
+											RAM_RD_BYTE_START(x"D0");
+											exe_state <= P2;
+										
+										when P2	=>
+											PSW <= i_ram_doByte;
+											exe_state <= P1;
+											cpu_state <= S3;
+											
+										when others =>
+									end case; -- end case exe state
+								
+								when S3 =>
+									case exe_state is
+										when P1	=>
+											RAM_RD_BYTE_START(x"F0");
+											exe_state <= P2;
+										
+										when P2	=>
+											DR <= i_ram_doByte;
+											exe_state <= P1;
+											cpu_state <= S4;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S4 =>
+									case exe_state is
+										when P1	=>  
+											RAM_RD_BYTE_START(x"E0");
+											exe_state <= P2;
+										
+										when P2	=>
+											ACC <= i_ram_doByte;
+											exe_state <= P1;
+											cpu_state <= S5;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S5 =>
+									case exe_state is
+										when P1	=>
+											mul_a_i <= "00000000" & ACC;
+											mul_b_i <= "00000000" & DR;
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S6;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S6 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S1;
+											machine_cycle <= M2; -- this is 2 cylces instruction
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when others =>
+							end case; -- end case cpu state
+							
+						when M2 =>
+							case cpu_state is
+								when S1 =>
+									case exe_state is
+										when P1 =>
+											exe_state <= P2;
+											
+										when P2 =>
+											exe_state <= P1;
+											cpu_state <= S2;
+											
+										when others =>
+									end case;
+									
+								when S2 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S3;
+											
+										when others =>
+									end case; -- end case exe state
+								
+								when S3 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											RAM_STOP;
+											exe_state <= P1;
+											cpu_state <= S4;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S4 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S5;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S5 =>
+									case exe_state is
+										when P1	=> 
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S6;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S6 =>
+									case exe_state is
+										when P1	=> 
+											exe_state <= P2;
+										
+										when P2	=>
+											RAM_STOP;
+											exe_state <= P1;
+											cpu_state <= S1;
+											machine_cycle <= M3; 
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when others =>
+							end case; 
+							
+						when M3 =>
+							case cpu_state is
+								when S1 =>
+									case exe_state is
+										when P1 =>
+											exe_state <= P2;
+											
+										when P2 =>
+											exe_state <= P1;
+											cpu_state <= S2;
+											
+										when others =>
+									end case;
+									
+								when S2 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S3;
+											
+										when others =>
+									end case; -- end case exe state
+								
+								when S3 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S4;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S4 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S5;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S5 =>
+									case exe_state is
+										when P1	=> 
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S6;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S6 =>
+									case exe_state is
+										when P1	=> 
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S1;
+											machine_cycle <= M4; -- end 2 cycles instruction, back to M1
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when others =>
+							end case; 
+
+							when M4 =>
+							case cpu_state is
+								when S1 =>
+									case exe_state is
+										when P1 =>
+											exe_state <= P2;
+											
+										when P2 =>
+											exe_state <= P1;
+											cpu_state <= S2;
+											
+										when others =>
+									end case;
+									
+								when S2 =>
+									case exe_state is
+										when P1	=>
+											RAM_WR_BYTE_START(x"F0", mul_prod_o(15 downto 8));
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S3;
+											
+										when others =>
+									end case; -- end case exe state
+								
+								when S3 =>
+									case exe_state is
+										when P1	=>
+											RAM_WR_BYTE_START(x"E0", mul_prod_o(7 downto 0));
+											exe_state <= P2;
+										
+										when P2	=>
+											RAM_STOP;
+											exe_state <= P1;
+											cpu_state <= S4;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S4 =>
+									case exe_state is
+										when P1	=>
+											if conv_integer(mul_prod_o(15 downto 0)) > 255 then
+												PSW(7) <= '0';
+												PSW(2) <= '1';
+												RAM_WR_BYTE_START(x"D0",PSW);
+											else
+												PSW(7) <= '0';
+												PSW(2) <= '0';
+												RAM_WR_BYTE_START(x"D0",PSW);
+											end if;
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S5;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S5 =>
+									case exe_state is
+										when P1	=> 
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S6;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S6 =>
+									case exe_state is
+										when P1	=> 
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S1;
+											machine_cycle <= M1; -- end 2 cycles instruction, back to M1
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when others =>
+							end case; -- end case cpu state
+						when others =>
+					end case; -- end case machine cycle
+
 				-- ANL A, Rn
 				-- 1 byte, 1 cycle
 				-- Autho : Gaurav Chandrashekar

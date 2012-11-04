@@ -3,7 +3,7 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="D:/Myproject/test_isim_beh.wdb" id="1" type="auto">
+      <db_ref path="C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/test_isim_beh.wdb" id="1" type="auto">
          <top_modules>
             <top_module name="constants" />
             <top_module name="std_logic_1164" />

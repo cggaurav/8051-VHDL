@@ -1,4 +1,4 @@
-Running: C:\Xilinx\13.2\ISE_DS\ISE\bin\nt\unwrapped\fuse.exe -intstyle ise -incremental -o C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/test_isim_beh.exe -prj C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/test_beh.prj work.test 
+Running: fuse.exe -relaunch -intstyle "ise" -incremental -o "C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/test_isim_beh.exe" -prj "C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/test_beh.prj" "test" 
 ISim O.61xd (signature 0x6dd86d03)
 Number of CPUs detected in this system: 1
 Turning on mult-threading, number of parallel sub-compilation jobs: 0 
@@ -18,8 +18,8 @@ Parsing VHDL file "C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/8051_top_fpga.
 Parsing VHDL file "C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/test.vhd" into library work
 Starting static elaboration
 Completed static elaboration
-Fuse Memory Usage: 101228 KB
-Fuse CPU Usage: 260 ms
+Fuse Memory Usage: 100268 KB
+Fuse CPU Usage: 220 ms
 Compiling package standard
 Compiling package std_logic_1164
 Compiling package std_logic_arith
@@ -41,5 +41,5 @@ Compiling architecture behavior of entity test
 Time Resolution for simulation is 1ps.
 Compiled 29 VHDL Units
 Built simulation executable C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/test_isim_beh.exe
-Fuse Memory Usage: 127708 KB
-Fuse CPU Usage: 960 ms
+Fuse Memory Usage: 126748 KB
+Fuse CPU Usage: 870 ms

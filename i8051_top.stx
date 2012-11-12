@@ -1,0 +1,56 @@
+Release 13.2 - xst O.61xd (nt)
+Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.
+--> Parameter TMPDIR set to C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.08 secs
+ 
+--> Parameter xsthdpdir set to C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/xst
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.08 secs
+ 
+--> WARNING:Xst:3164 - Option "-debug" found multiple times in the command line. Only the first occurence is considered.
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling vhdl file "C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/constants.vhd" in Library work.
+Compiling vhdl file "C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/ext_interrupt.vhd" in Library work.
+Architecture behavioral of Entity ext_interrupt is up to date.
+Compiling vhdl file "C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/csadder.vhd" in Library work.
+Architecture csadderbeh of Entity csadder is up to date.
+Compiling vhdl file "C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/sequencer2 .vhd" in Library work.
+Entity <sequencer2> compiled.
+Entity <sequencer2> (Architecture <seq_arch>) compiled.
+Compiling vhdl file "C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/fastalu.vhd" in Library work.
+Architecture fastalu_arch of Entity fastalu is up to date.
+Compiling vhdl file "C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/regfile.vhd" in Library work.
+Architecture regarch of Entity regfile is up to date.
+Compiling vhdl file "C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/multiplier.vhd" in Library work.
+Architecture rtl of Entity multiplier is up to date.
+Compiling vhdl file "C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/int_rom.vhd" in Library work.
+Architecture behavioral of Entity int_rom is up to date.
+Compiling vhdl file "C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/int_ram.vhd" in Library work.
+Architecture syn of Entity internal_ram is up to date.
+Compiling vhdl file "C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/divider.vhd" in Library work.
+Architecture rtl of Entity divider is up to date.
+Compiling vhdl file "C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/int_handler.vhd" in Library work.
+Architecture behavioral of Entity int_handler is up to date.
+Compiling vhdl file "C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/8051_top_fpga.vhd" in Library work.
+Architecture behavioral of Entity i8051_top is up to date.
+
+
+Total REAL time to Xst completion: 1.00 secs
+Total CPU time to Xst completion: 0.67 secs
+ 
+--> 
+
+Total memory usage is 166024 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :    1 (   0 filtered)
+Number of infos    :    0 (   0 filtered)
+

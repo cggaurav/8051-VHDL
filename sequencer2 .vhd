@@ -568,15 +568,12 @@ begin
 								when S3 =>
 									case exe_state is
 										when P1	=>
-											RAM_RD_BYTE_START(x"E0");
-											DR <= i_ram_doByte;
+											RAM_RD_BYTE_START(i_ram_doByte);
 											exe_state <= P2;
 										
 										when P2	=>
-											alu_src_1L <= i_ram_doByte;
-											alu_src_2L <= DR;
-											alu_op_code <= ALU_OPC_ADD;
-											alu_by_wd <= '0';
+											RAM_RD_BYTE_START(x"E0");
+											DR <= i_ram_doByte;
 											exe_state <= P1;
 											cpu_state <= S4;
 											
@@ -585,6 +582,10 @@ begin
 								when S4 => -- 1 byte instruction, do nothing here
 									case exe_state is
 										when P1	=>  
+											alu_src_1L <= i_ram_doByte;
+											alu_src_2L <= DR;
+											alu_op_code <= ALU_OPC_ADD;
+											alu_by_wd <= '0';
 											exe_state <= P2;
 										
 										when P2	=>
@@ -836,16 +837,12 @@ begin
 								when S3 =>
 									case exe_state is
 										when P1	=>
-											RAM_RD_BYTE_START(x"E0");
-											DR <= i_ram_doByte;
+											RAM_RD_BYTE_START(i_ram_doByte);
 											exe_state <= P2;
 										
 										when P2	=>
-											alu_src_1L <= i_ram_doByte;
-											alu_src_2L <= DR;
-											alu_op_code <= ALU_OPC_ADC;
-											alu_by_wd <= '0';
-											alu_cy_bw <= PSW(7);
+											RAM_RD_BYTE_START(x"E0");
+											DR <= i_ram_doByte;
 											exe_state <= P1;
 											cpu_state <= S4;
 											
@@ -854,6 +851,11 @@ begin
 								when S4 => -- 1 byte instruction, do nothing here
 									case exe_state is
 										when P1	=>  
+											alu_src_1L <= i_ram_doByte;
+											alu_src_2L <= DR;
+											alu_op_code <= ALU_OPC_ADC;
+											alu_by_wd <= '0';
+											alu_cy_bw <= PSW(7);
 											exe_state <= P2;
 										
 										when P2	=>
@@ -1194,16 +1196,12 @@ begin
 								when S3 =>
 									case exe_state is
 										when P1	=>
-											RAM_RD_BYTE_START(x"E0");
-											DR <= i_ram_doByte;
+											RAM_RD_BYTE_START(i_ram_doByte);
 											exe_state <= P2;
 										
 										when P2	=>
-											alu_src_1L <= i_ram_doByte;
-											alu_src_2L <= DR;
-											alu_op_code <= ALU_OPC_SBB;
-											alu_by_wd <= '0';
-											alu_cy_bw <= PSW(7);
+											RAM_RD_BYTE_START(x"E0");
+											DR <= i_ram_doByte;
 											exe_state <= P1;
 											cpu_state <= S4;
 											
@@ -1212,6 +1210,11 @@ begin
 								when S4 => -- 1 byte instruction, do nothing here
 									case exe_state is
 										when P1	=>  
+											alu_src_1L <= i_ram_doByte;
+											alu_src_2L <= DR;
+											alu_op_code <= ALU_OPC_SBB;
+											alu_by_wd <= '0';
+											alu_cy_bw <= PSW(7);
 											exe_state <= P2;
 										
 										when P2	=>
@@ -1550,16 +1553,12 @@ begin
 								when S3 =>
 									case exe_state is
 										when P1	=>
-											RAM_RD_BYTE_START(x"E0");
-											DR <= i_ram_doByte;
+											RAM_RD_BYTE_START(i_ram_doByte);
 											exe_state <= P2;
 										
 										when P2	=>
-											alu_src_1L <= i_ram_doByte;
-											alu_src_2L <= DR;
-											alu_op_code <= ALU_OPC_OR;
-											alu_by_wd <= '0';
-											alu_cy_bw <= '0';
+											RAM_RD_BYTE_START(x"E0");
+											DR <= i_ram_doByte;
 											exe_state <= P1;
 											cpu_state <= S4;
 											
@@ -1567,7 +1566,12 @@ begin
 									end case; -- end case exe state
 								when S4 => -- 1 byte instruction, do nothing here
 									case exe_state is
-										when P1	=>  
+										when P1	=> 
+											alu_src_1L <= i_ram_doByte;
+											alu_src_2L <= DR;
+											alu_op_code <= ALU_OPC_OR;
+											alu_by_wd <= '0';
+											alu_cy_bw <= '0'; 
 											exe_state <= P2;
 										
 										when P2	=>
@@ -2826,16 +2830,12 @@ begin
 								when S3 =>
 									case exe_state is
 										when P1	=>
-											RAM_RD_BYTE_START(x"E0");
-											DR <= i_ram_doByte;
+											RAM_RD_BYTE_START(i_ram_doByte);
 											exe_state <= P2;
 										
 										when P2	=>
-											alu_src_1L <= i_ram_doByte;
-											alu_src_2L <= DR;
-											alu_op_code <= ALU_OPC_AND;
-											alu_by_wd <= '0';
-											alu_cy_bw <= '0';
+											RAM_RD_BYTE_START(x"E0");
+											DR <= i_ram_doByte;
 											exe_state <= P1;
 											cpu_state <= S4;
 											
@@ -2844,6 +2844,11 @@ begin
 								when S4 => -- 1 byte instruction, do nothing here
 									case exe_state is
 										when P1	=>  
+											alu_src_1L <= i_ram_doByte;
+											alu_src_2L <= DR;
+											alu_op_code <= ALU_OPC_AND;
+											alu_by_wd <= '0';
+											alu_cy_bw <= '0';
 											exe_state <= P2;
 										
 										when P2	=>
@@ -3441,16 +3446,12 @@ begin
 								when S3 =>
 									case exe_state is
 										when P1	=>
-											RAM_RD_BYTE_START(x"E0");
-											DR <= i_ram_doByte;
+											RAM_RD_BYTE_START(i_ram_doByte);		
 											exe_state <= P2;
 										
 										when P2	=>
-											alu_src_1L <= i_ram_doByte;
-											alu_src_2L <= DR;
-											alu_op_code <= ALU_OPC_XOR;
-											alu_by_wd <= '0';
-											alu_cy_bw <= '0';
+											RAM_RD_BYTE_START(x"E0");
+											DR <= i_ram_doByte;
 											exe_state <= P1;
 											cpu_state <= S4;
 											
@@ -3459,6 +3460,11 @@ begin
 								when S4 => -- 1 byte instruction, do nothing here
 									case exe_state is
 										when P1	=>  
+											alu_src_1L <= i_ram_doByte;
+											alu_src_2L <= DR;
+											alu_op_code <= ALU_OPC_XOR;
+											alu_by_wd <= '0';
+											alu_cy_bw <= '0';
 											exe_state <= P2;
 										
 										when P2	=>
@@ -6243,6 +6249,7 @@ begin
 											exe_state <= P2;
 										
 										when P2	=>
+											RAM_RD_BYTE_START(i_ram_doByte);
 											exe_state <= P1;
 											cpu_state <= S5;
 											
@@ -6328,6 +6335,7 @@ begin
 											exe_state <= P2;
 										
 										when P2	=>
+											RAM_RD_BYTE_START(i_ram_doByte);
 											exe_state <= P1;
 											cpu_state <= S5;
 											

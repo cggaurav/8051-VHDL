@@ -6050,12 +6050,12 @@ begin
 									case exe_state is
 										when P1	=>
 											RAM_RD_BYTE_START(x"D0");
-											PSW <= i_ram_doByte;
+											
 											exe_state <= P2;
 										
 										when P2	=>
+											PSW <= i_ram_doByte;
 											RAM_RD_BYTE_START("000" & PSW(4 downto 3) & IR(2 downto 0));
-											DR <= i_ram_doByte; -- Rn
 											exe_state <= P1;
 											cpu_state <= S3;
 											
@@ -6065,6 +6065,7 @@ begin
 								when S3 =>
 									case exe_state is
 										when P1	=>
+											DR <= i_ram_doByte; -- Rn
 											exe_state <= P2;
 										
 										when P2	=>
@@ -6219,12 +6220,11 @@ begin
 									case exe_state is
 										when P1	=>
 											RAM_RD_BYTE_START(x"D0");
-											PSW <= i_ram_doByte;
 											exe_state <= P2;
 										
 										when P2	=>
+											PSW <= i_ram_doByte;
 											RAM_RD_BYTE_START("000" & PSW(4 downto 3) & "00" & IR(0));
-											AR <= i_ram_doByte; -- Address of @Ri
 											exe_state <= P1;
 											cpu_state <= S3;
 											
@@ -6234,9 +6234,13 @@ begin
 								when S3 =>
 									case exe_state is
 										when P1	=>
+											AR <= i_ram_doByte; -- Address of @Ri
+											RAM_RD_BYTE_START(AR);
 											exe_state <= P2;
 										
 										when P2	=>
+											DR <= i_ram_doByte; -- @Ri
+											RAM_RD_BYTE_START(x"E0"); -- ACC
 											exe_state <= P1;
 											cpu_state <= S4;
 											
@@ -6249,7 +6253,6 @@ begin
 											exe_state <= P2;
 										
 										when P2	=>
-											RAM_RD_BYTE_START(i_ram_doByte);
 											exe_state <= P1;
 											cpu_state <= S5;
 											
@@ -6259,12 +6262,11 @@ begin
 								when S5 =>
 									case exe_state is
 										when P1	=> 
-											RAM_RD_BYTE_START(AR);
-											DR <= i_ram_doByte; -- @Ri
+											
 											exe_state <= P2;
 										
 										when P2	=>
-											RAM_RD_BYTE_START(x"E0"); -- ACC
+											
 											exe_state <= P1;
 											cpu_state <= S6;
 											
@@ -6305,12 +6307,12 @@ begin
 									case exe_state is
 										when P1	=>
 											RAM_RD_BYTE_START(x"D0");
-											PSW <= i_ram_doByte;
+											
 											exe_state <= P2;
 										
 										when P2	=>
+											PSW <= i_ram_doByte;
 											RAM_RD_BYTE_START("000" & PSW(4 downto 3) & "00" & IR(0));
-											AR <= i_ram_doByte; -- Address of @Ri
 											exe_state <= P1;
 											cpu_state <= S3;
 											
@@ -6320,9 +6322,11 @@ begin
 								when S3 =>
 									case exe_state is
 										when P1	=>
+											AR <= i_ram_doByte; -- Address of @Ri
 											exe_state <= P2;
 										
 										when P2	=>
+											RAM_RD_BYTE_START(AR);
 											exe_state <= P1;
 											cpu_state <= S4;
 											
@@ -6332,10 +6336,11 @@ begin
 								when S4 => -- 1 byte instruction, do nothing here
 									case exe_state is
 										when P1	=>  
+											DR <= i_ram_doByte; -- @Ri
 											exe_state <= P2;
 										
 										when P2	=>
-											RAM_RD_BYTE_START(i_ram_doByte);
+											RAM_RD_BYTE_START(x"E0"); -- ACC
 											exe_state <= P1;
 											cpu_state <= S5;
 											
@@ -6345,13 +6350,10 @@ begin
 								when S5 =>
 									case exe_state is
 										when P1	=> 
-											RAM_RD_BYTE_START(AR);
-											DR <= i_ram_doByte; -- @Ri
+											ACC <= i_ram_doByte;
 											exe_state <= P2;
 										
 										when P2	=>
-											RAM_RD_BYTE_START(x"E0"); -- ACC
-											ACC <= i_ram_doByte;
 											exe_state <= P1;
 											cpu_state <= S6;
 											

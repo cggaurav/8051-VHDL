@@ -70,7 +70,6 @@ architecture seq_arch of sequencer2 is
 	signal PC				: std_logic_vector(15 downto 0);		-- Program Counter
 	signal AR				: std_logic_vector(7 downto 0);		-- Address Register
 	signal DR				: std_logic_vector(7 downto 0);		-- Data Register
-	signal GR 				: std_logic_vector(7 downto 0); 	-- Gaurav's Register
 	signal ACC				: std_logic_vector(7 downto 0);		-- Accummulator
 	signal PSW				: std_logic_vector(7 downto 0);
 	signal int_hold		: std_logic;
@@ -1887,8 +1886,6 @@ begin
 											
 										when P2 =>
 											PC <= PC + 1;
-											GR <= i_rom_data;
-											ROM_STOP;
 											exe_state <= P1;
 											cpu_state <= S2;
 											
@@ -1936,13 +1933,14 @@ begin
 									case exe_state is
 										when P1	=> 
 											alu_src_1L <= DR;
-											alu_src_2L <= GR;
+											alu_src_2L <= i_rom_data;
 											alu_op_code <= ALU_OPC_OR;
 											alu_by_wd <= '0';
 											alu_cy_bw <= '0';
 											exe_state <= P2;
 										
 										when P2	=>
+											ROM_STOP;
 											RAM_WR_BYTE_START(AR, alu_ans_L);
 											UPDATE_PSW;
 											exe_state <= P1;
@@ -3176,8 +3174,6 @@ begin
 											
 										when P2 =>
 											PC <= PC + 1;
-											GR <= i_rom_data;
-											ROM_STOP;
 											exe_state <= P1;
 											cpu_state <= S2;
 											
@@ -3225,7 +3221,7 @@ begin
 									case exe_state is
 										when P1	=> 
 											alu_src_1L <= DR;
-											alu_src_2L <= GR;
+											alu_src_2L <= i_rom_data;
 											alu_op_code <= ALU_OPC_AND;
 											alu_by_wd <= '0';
 											alu_cy_bw <= '0';
@@ -3233,6 +3229,7 @@ begin
 										
 										when P2	=>
 											RAM_WR_BYTE_START(AR, alu_ans_L);
+											ROM_STOP;
 											UPDATE_PSW;
 											exe_state <= P1;
 											cpu_state <= S6;
@@ -3804,8 +3801,6 @@ begin
 											
 										when P2 =>
 											PC <= PC + 1;
-											GR <= i_rom_data;
-											ROM_STOP;
 											exe_state <= P1;
 											cpu_state <= S2;
 											
@@ -3853,7 +3848,7 @@ begin
 									case exe_state is
 										when P1	=> 
 											alu_src_1L <= DR;
-											alu_src_2L <= GR;
+											alu_src_2L <= i_rom_data;
 											alu_op_code <= ALU_OPC_XOR;
 											alu_by_wd <= '0';
 											alu_cy_bw <= '0';

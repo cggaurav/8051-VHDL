@@ -8,39 +8,6 @@
 <!-- Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.    -->
 
 <messages>
-<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/8051_top_fpga.vhd&quot; into library work</arg>
-</msg>
-
-<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/constants.vhd&quot; into library work</arg>
-</msg>
-
-<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/csadder.vhd&quot; into library work</arg>
-</msg>
-
-<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/divider.vhd&quot; into library work</arg>
-</msg>
-
-<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/ext_interrupt.vhd&quot; into library work</arg>
-</msg>
-
-<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/fastalu.vhd&quot; into library work</arg>
-</msg>
-
-<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/int_handler.vhd&quot; into library work</arg>
-</msg>
-
-<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/int_ram.vhd&quot; into library work</arg>
-</msg>
-
-<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/int_rom.vhd&quot; into library work</arg>
-</msg>
-
-<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/multiplier.vhd&quot; into library work</arg>
-</msg>
-
-<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/regfile.vhd&quot; into library work</arg>
-</msg>
-
 <msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/sequencer2 .vhd&quot; into library work</arg>
 </msg>
 

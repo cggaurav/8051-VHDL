@@ -1408,11 +1408,9 @@ begin
 									case exe_state is
 										when P1	=> 
 											RAM_WR_BYTE_START(x"E0", alu_ans_L);
-											UPDATE_PSW;
 											exe_state <= P2;
 										
 										when P2	=>
-											RAM_WR_BYTE_START(x"D0", PSW);
 											exe_state <= P1;
 											cpu_state <= S6;
 											
@@ -1501,7 +1499,6 @@ begin
 										
 										when P2	=>
 											RAM_WR_BYTE_START(x"E0", alu_ans_L);
-											UPDATE_PSW;
 											exe_state <= P1;
 											cpu_state <= S6;
 											
@@ -1510,7 +1507,6 @@ begin
 								when S6 =>
 									case exe_state is
 										when P1	=>  
-											RAM_WR_BYTE_START(x"D0", PSW);
 											exe_state <= P2;
 										
 										when P2	=>
@@ -1584,11 +1580,9 @@ begin
 									case exe_state is
 										when P1	=> 
 											RAM_WR_BYTE_START(x"E0", alu_ans_L);
-											UPDATE_PSW;
 											exe_state <= P2;
 										
 										when P2	=>
-											RAM_WR_BYTE_START(x"D0", PSW);
 											exe_state <= P1;
 											cpu_state <= S6;
 											
@@ -1678,7 +1672,6 @@ begin
 										
 										when P2	=>
 											RAM_WR_BYTE_START(x"E0", alu_ans_L);
-											UPDATE_PSW;
 											exe_state <= P1;
 											cpu_state <= S6;
 											
@@ -1688,7 +1681,6 @@ begin
 								when S6 =>
 									case exe_state is
 										when P1	=>  
-											RAM_WR_BYTE_START(x"D0", PSW);
 											exe_state <= P2;
 										
 										when P2	=>
@@ -1769,7 +1761,6 @@ begin
 										
 										when P2	=>
 											RAM_WR_BYTE_START(DR, alu_ans_L);
-											UPDATE_PSW;
 											exe_state <= P1;
 											cpu_state <= S6;
 											
@@ -1778,7 +1769,6 @@ begin
 								when S6 =>
 									case exe_state is
 										when P1	=>  
-											RAM_WR_BYTE_START(x"D0", PSW);
 											exe_state <= P2;
 										
 										when P2	=>
@@ -1942,7 +1932,6 @@ begin
 										when P2	=>
 											ROM_STOP;
 											RAM_WR_BYTE_START(AR, alu_ans_L);
-											UPDATE_PSW;
 											exe_state <= P1;
 											cpu_state <= S6;
 											
@@ -1952,7 +1941,6 @@ begin
 								when S6 =>
 									case exe_state is
 										when P1	=> 
-											RAM_WR_BYTE_START(x"D0", PSW);
 											exe_state <= P2;
 										
 										when P2	=>
@@ -2696,11 +2684,9 @@ begin
 									case exe_state is
 										when P1	=> 
 											RAM_WR_BYTE_START(x"E0", alu_ans_L);
-											UPDATE_PSW;
 											exe_state <= P2;
 										
 										when P2	=>
-											RAM_WR_BYTE_START(x"D0", PSW);
 											exe_state <= P1;
 											cpu_state <= S6;
 											
@@ -2789,7 +2775,6 @@ begin
 										
 										when P2	=>
 											RAM_WR_BYTE_START(x"E0", alu_ans_L);
-											UPDATE_PSW;
 											exe_state <= P1;
 											cpu_state <= S6;
 											
@@ -2798,7 +2783,6 @@ begin
 								when S6 =>
 									case exe_state is
 										when P1	=>  
-											RAM_WR_BYTE_START(x"D0", PSW);
 											exe_state <= P2;
 										
 										when P2	=>
@@ -2872,11 +2856,9 @@ begin
 									case exe_state is
 										when P1	=> 
 											RAM_WR_BYTE_START(x"E0", alu_ans_L);
-											UPDATE_PSW;
 											exe_state <= P2;
 										
 										when P2	=>
-											RAM_WR_BYTE_START(x"D0", PSW);
 											exe_state <= P1;
 											cpu_state <= S6;
 											
@@ -2966,7 +2948,6 @@ begin
 										
 										when P2	=>
 											RAM_WR_BYTE_START(x"E0", alu_ans_L);
-											UPDATE_PSW;
 											exe_state <= P1;
 											cpu_state <= S6;
 											
@@ -2976,7 +2957,6 @@ begin
 								when S6 =>
 									case exe_state is
 										when P1	=>  
-											RAM_WR_BYTE_START(x"D0", PSW);
 											exe_state <= P2;
 										
 										when P2	=>
@@ -3057,7 +3037,6 @@ begin
 										
 										when P2	=>
 											RAM_WR_BYTE_START(DR, alu_ans_L);
-											UPDATE_PSW;
 											exe_state <= P1;
 											cpu_state <= S6;
 											
@@ -3066,7 +3045,6 @@ begin
 								when S6 =>
 									case exe_state is
 										when P1	=>  
-											RAM_WR_BYTE_START(x"D0", PSW);
 											exe_state <= P2;
 										
 										when P2	=>
@@ -3230,7 +3208,6 @@ begin
 										when P2	=>
 											RAM_WR_BYTE_START(AR, alu_ans_L);
 											ROM_STOP;
-											UPDATE_PSW;
 											exe_state <= P1;
 											cpu_state <= S6;
 											
@@ -3240,7 +3217,6 @@ begin
 								when S6 =>
 									case exe_state is
 										when P1	=> 
-											RAM_WR_BYTE_START(x"D0", PSW);
 											exe_state <= P2;
 										
 										when P2	=>
@@ -3323,11 +3299,9 @@ begin
 									case exe_state is
 										when P1	=> 
 											RAM_WR_BYTE_START(x"E0", alu_ans_L);
-											UPDATE_PSW;
 											exe_state <= P2;
 										
 										when P2	=>
-											RAM_WR_BYTE_START(x"D0", PSW);
 											exe_state <= P1;
 											cpu_state <= S6;
 											
@@ -3416,7 +3390,6 @@ begin
 										
 										when P2	=>
 											RAM_WR_BYTE_START(x"E0", alu_ans_L);
-											UPDATE_PSW;
 											exe_state <= P1;
 											cpu_state <= S6;
 											
@@ -3425,7 +3398,6 @@ begin
 								when S6 =>
 									case exe_state is
 										when P1	=>  
-											RAM_WR_BYTE_START(x"D0", PSW);
 											exe_state <= P2;
 										
 										when P2	=>
@@ -3499,11 +3471,9 @@ begin
 									case exe_state is
 										when P1	=> 
 											RAM_WR_BYTE_START(x"E0", alu_ans_L);
-											UPDATE_PSW;
 											exe_state <= P2;
 										
 										when P2	=>
-											RAM_WR_BYTE_START(x"D0", PSW);
 											exe_state <= P1;
 											cpu_state <= S6;
 											
@@ -3593,7 +3563,6 @@ begin
 										
 										when P2	=>
 											RAM_WR_BYTE_START(x"E0", alu_ans_L);
-											UPDATE_PSW;
 											exe_state <= P1;
 											cpu_state <= S6;
 											
@@ -3603,7 +3572,6 @@ begin
 								when S6 =>
 									case exe_state is
 										when P1	=>  
-											RAM_WR_BYTE_START(x"D0", PSW);
 											exe_state <= P2;
 										
 										when P2	=>
@@ -3684,7 +3652,6 @@ begin
 										
 										when P2	=>
 											RAM_WR_BYTE_START(DR, alu_ans_L);
-											UPDATE_PSW;
 											exe_state <= P1;
 											cpu_state <= S6;
 											
@@ -3693,7 +3660,6 @@ begin
 								when S6 =>
 									case exe_state is
 										when P1	=>  
-											RAM_WR_BYTE_START(x"D0", PSW);
 											exe_state <= P2;
 										
 										when P2	=>
@@ -3856,7 +3822,6 @@ begin
 										
 										when P2	=>
 											RAM_WR_BYTE_START(AR, alu_ans_L);
-											UPDATE_PSW;
 											exe_state <= P1;
 											cpu_state <= S6;
 											
@@ -3866,7 +3831,6 @@ begin
 								when S6 =>
 									case exe_state is
 										when P1	=> 
-											RAM_WR_BYTE_START(x"D0", PSW);
 											exe_state <= P2;
 										
 										when P2	=>

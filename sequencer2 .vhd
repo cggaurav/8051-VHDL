@@ -5292,7 +5292,6 @@ begin
 										
 										when P2	=>
 											RAM_WR_BYTE_START(x"83", alu_ans_H);
-											RAM_STOP;
 											exe_state <= P1;
 											cpu_state <= S4;
 											

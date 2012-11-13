@@ -74,8 +74,6 @@ architecture seq_arch of sequencer2 is
 	signal PSW				: std_logic_vector(7 downto 0);
 	signal int_hold		: std_logic;
 	
-	
-	
 begin
 
    process(rst, clk)
@@ -2819,8 +2817,8 @@ begin
 											exe_state <= P2;
 										
 										when P2	=>
-											RAM_RD_BYTE_START("000" & i_ram_doByte(4 downto 3) & "00" & IR(0));
 											PSW <= i_ram_doByte;
+											RAM_RD_BYTE_START("000" & PSW(4 downto 3) & "00" & IR(0));
 											exe_state <= P1;
 											cpu_state <= S3;
 											
@@ -2834,8 +2832,8 @@ begin
 											exe_state <= P2;
 										
 										when P2	=>
-											RAM_RD_BYTE_START(x"E0");
 											DR <= i_ram_doByte;
+											RAM_RD_BYTE_START(x"E0");
 											exe_state <= P1;
 											cpu_state <= S4;
 											
@@ -12765,6 +12763,998 @@ begin
 							
 						when others =>
 					end case; -- end case machine cycle
+
+				-- MOVX A,@Ri
+				-- 2 bytes, 2 cycles
+				-- Author: Gaurav Chandrashekar
+				-- Status: Not Simulated
+				when  "11100010" | "11100011"  =>
+					case machine_cycle is
+						when M1 =>
+							case cpu_state is
+								when S2 =>
+									case exe_state is
+										when P1	=>
+											RAM_RD_BYTE_START(x"81");
+											exe_state <= P2;
+										
+										when P2	=>
+											AR <= i_ram_doByte;
+											RAM_RD_BYTE_START(AR);
+											exe_state <= P1;
+											cpu_state <= S3;
+											
+										when others =>
+									end case; -- end case exe state
+								
+								when S3 =>
+									case exe_state is
+										when P1	=>
+											AR <= AR - 1;
+											DR <= i_ram_doByte;
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S4;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S4 =>
+									case exe_state is
+										when P1	=>  
+											ROM_RD_START(PC);
+											exe_state <= P2;
+										
+										when P2	=>
+											PC <= PC + 1;
+											ROM_STOP;
+											exe_state <= P1;
+											cpu_state <= S5;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S5 =>
+									case exe_state is
+										when P1	=> 
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S6;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S6 =>
+									case exe_state is
+										when P1	=>  
+											RAM_WR_BYTE_START(i_rom_data,DR);
+											exe_state <= P2;
+										
+										when P2	=>
+											RAM_WR_BYTE_START(x"81",AR);
+										   	RAM_STOP;
+											exe_state <= P1;
+											cpu_state <= S1;
+											machine_cycle <= M2; -- this is 2 cylces instruction
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when others =>
+							end case; -- end case cpu state
+							
+						when M2 =>
+							case cpu_state is
+								when S1 =>
+									case exe_state is
+										when P1 =>
+											exe_state <= P2;
+											
+										when P2 =>
+											exe_state <= P1;
+											cpu_state <= S2;
+											
+										when others =>
+									end case;
+									
+								when S2 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S3;
+											
+										when others =>
+									end case; -- end case exe state
+								
+								when S3 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S4;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S4 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S5;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S5 =>
+									case exe_state is
+										when P1	=> 
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S6;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S6 =>
+									case exe_state is
+										when P1	=> 
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S1;
+											machine_cycle <= M1; -- end 2 cycles instruction, back to M1
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when others =>
+							end case; -- end case cpu state
+							
+						when others =>
+					end case; -- end case machine cycle
+
+				-- MOVX A,@DPTR
+				-- 2 bytes, 2 cycles
+				-- Author: Gaurav Chandrashekar
+				-- Status: Not Simulated
+				when  "11100000"  =>
+					case machine_cycle is
+						when M1 =>
+							case cpu_state is
+								when S2 =>
+									case exe_state is
+										when P1	=>
+											RAM_RD_BYTE_START(x"81");
+											exe_state <= P2;
+										
+										when P2	=>
+											AR <= i_ram_doByte;
+											RAM_RD_BYTE_START(AR);
+											exe_state <= P1;
+											cpu_state <= S3;
+											
+										when others =>
+									end case; -- end case exe state
+								
+								when S3 =>
+									case exe_state is
+										when P1	=>
+											AR <= AR - 1;
+											DR <= i_ram_doByte;
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S4;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S4 =>
+									case exe_state is
+										when P1	=>  
+											ROM_RD_START(PC);
+											exe_state <= P2;
+										
+										when P2	=>
+											PC <= PC + 1;
+											ROM_STOP;
+											exe_state <= P1;
+											cpu_state <= S5;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S5 =>
+									case exe_state is
+										when P1	=> 
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S6;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S6 =>
+									case exe_state is
+										when P1	=>  
+											RAM_WR_BYTE_START(i_rom_data,DR);
+											exe_state <= P2;
+										
+										when P2	=>
+											RAM_WR_BYTE_START(x"81",AR);
+										   	RAM_STOP;
+											exe_state <= P1;
+											cpu_state <= S1;
+											machine_cycle <= M2; -- this is 2 cylces instruction
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when others =>
+							end case; -- end case cpu state
+							
+						when M2 =>
+							case cpu_state is
+								when S1 =>
+									case exe_state is
+										when P1 =>
+											exe_state <= P2;
+											
+										when P2 =>
+											exe_state <= P1;
+											cpu_state <= S2;
+											
+										when others =>
+									end case;
+									
+								when S2 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S3;
+											
+										when others =>
+									end case; -- end case exe state
+								
+								when S3 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S4;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S4 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S5;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S5 =>
+									case exe_state is
+										when P1	=> 
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S6;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S6 =>
+									case exe_state is
+										when P1	=> 
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S1;
+											machine_cycle <= M1; -- end 2 cycles instruction, back to M1
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when others =>
+							end case; -- end case cpu state
+							
+						when others =>
+					end case; -- end case machine cycle
+
+				-- MOVX @Ri,A
+				-- 2 bytes, 2 cycles
+				-- Author: Gaurav Chandrashekar
+				-- Status: Not Simulated
+				when  "11110010" | "11110011"  =>
+					case machine_cycle is
+						when M1 =>
+							case cpu_state is
+								when S2 =>
+									case exe_state is
+										when P1	=>
+											RAM_RD_BYTE_START(x"81");
+											exe_state <= P2;
+										
+										when P2	=>
+											AR <= i_ram_doByte;
+											RAM_RD_BYTE_START(AR);
+											exe_state <= P1;
+											cpu_state <= S3;
+											
+										when others =>
+									end case; -- end case exe state
+								
+								when S3 =>
+									case exe_state is
+										when P1	=>
+											AR <= AR - 1;
+											DR <= i_ram_doByte;
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S4;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S4 =>
+									case exe_state is
+										when P1	=>  
+											ROM_RD_START(PC);
+											exe_state <= P2;
+										
+										when P2	=>
+											PC <= PC + 1;
+											ROM_STOP;
+											exe_state <= P1;
+											cpu_state <= S5;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S5 =>
+									case exe_state is
+										when P1	=> 
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S6;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S6 =>
+									case exe_state is
+										when P1	=>  
+											RAM_WR_BYTE_START(i_rom_data,DR);
+											exe_state <= P2;
+										
+										when P2	=>
+											RAM_WR_BYTE_START(x"81",AR);
+										   	RAM_STOP;
+											exe_state <= P1;
+											cpu_state <= S1;
+											machine_cycle <= M2; -- this is 2 cylces instruction
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when others =>
+							end case; -- end case cpu state
+							
+						when M2 =>
+							case cpu_state is
+								when S1 =>
+									case exe_state is
+										when P1 =>
+											exe_state <= P2;
+											
+										when P2 =>
+											exe_state <= P1;
+											cpu_state <= S2;
+											
+										when others =>
+									end case;
+									
+								when S2 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S3;
+											
+										when others =>
+									end case; -- end case exe state
+								
+								when S3 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S4;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S4 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S5;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S5 =>
+									case exe_state is
+										when P1	=> 
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S6;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S6 =>
+									case exe_state is
+										when P1	=> 
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S1;
+											machine_cycle <= M1; -- end 2 cycles instruction, back to M1
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when others =>
+							end case; -- end case cpu state
+							
+						when others =>
+					end case; -- end case machine cycle
+
+				-- MOVX @DPTR,A
+				-- 2 bytes, 2 cycles
+				-- Author: Gaurav Chandrashekar
+				-- Status: Not Simulated
+				when  "11110000" =>
+					case machine_cycle is
+						when M1 =>
+							case cpu_state is
+								when S2 =>
+									case exe_state is
+										when P1	=>
+											RAM_RD_BYTE_START(x"81");
+											exe_state <= P2;
+										
+										when P2	=>
+											AR <= i_ram_doByte;
+											RAM_RD_BYTE_START(AR);
+											exe_state <= P1;
+											cpu_state <= S3;
+											
+										when others =>
+									end case; -- end case exe state
+								
+								when S3 =>
+									case exe_state is
+										when P1	=>
+											AR <= AR - 1;
+											DR <= i_ram_doByte;
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S4;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S4 =>
+									case exe_state is
+										when P1	=>  
+											ROM_RD_START(PC);
+											exe_state <= P2;
+										
+										when P2	=>
+											PC <= PC + 1;
+											ROM_STOP;
+											exe_state <= P1;
+											cpu_state <= S5;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S5 =>
+									case exe_state is
+										when P1	=> 
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S6;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S6 =>
+									case exe_state is
+										when P1	=>  
+											RAM_WR_BYTE_START(i_rom_data,DR);
+											exe_state <= P2;
+										
+										when P2	=>
+											RAM_WR_BYTE_START(x"81",AR);
+										   	RAM_STOP;
+											exe_state <= P1;
+											cpu_state <= S1;
+											machine_cycle <= M2; -- this is 2 cylces instruction
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when others =>
+							end case; -- end case cpu state
+							
+						when M2 =>
+							case cpu_state is
+								when S1 =>
+									case exe_state is
+										when P1 =>
+											exe_state <= P2;
+											
+										when P2 =>
+											exe_state <= P1;
+											cpu_state <= S2;
+											
+										when others =>
+									end case;
+									
+								when S2 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S3;
+											
+										when others =>
+									end case; -- end case exe state
+								
+								when S3 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S4;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S4 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S5;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S5 =>
+									case exe_state is
+										when P1	=> 
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S6;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S6 =>
+									case exe_state is
+										when P1	=> 
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S1;
+											machine_cycle <= M1; -- end 2 cycles instruction, back to M1
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when others =>
+							end case; -- end case cpu state
+							
+						when others =>
+					end case; -- end case machine cycle
+
+				-- MOVC A,@A+PC
+				-- 2 bytes, 2 cycles
+				-- Author: Gaurav Chandrashekar
+				-- Status: Not Simulated
+				when  "11100010" | "11100011" =>
+					case machine_cycle is
+						when M1 =>
+							case cpu_state is
+								when S2 =>
+									case exe_state is
+										when P1	=>
+											RAM_RD_BYTE_START(x"E0");
+											exe_state <= P2;
+										
+										when P2	=>
+											ACC <= i_ram_doByte;
+											exe_state <= P1;
+											cpu_state <= S3;
+											
+										when others =>
+									end case; -- end case exe state
+								
+								when S3 =>
+									case exe_state is
+										when P1	=>
+											alu_src_1L <= ACC; -- 
+											alu_src_1H <= "00000000"; -- 
+											alu_src_2L <= PC(7 downto 0); -- 
+											alu_src_2H <= PC(15 downto 8); -- 
+											alu_by_wd <= '1';
+											alu_op_code <= ALU_OPC_ADD;
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S4;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S4 =>
+									case exe_state is
+										when P1	=>  
+											ROM_RD_START(alu_ans_H & alu_ans_L);
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S5;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S5 =>
+									case exe_state is
+										when P1	=> 
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S6;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S6 =>
+									case exe_state is
+										when P1	=>  
+											RAM_WR_BYTE_START(x"E0", i_rom_data);
+											exe_state <= P2;
+										
+										when P2	=>
+										   	RAM_STOP;
+										   	ROM_STOP;
+											exe_state <= P1;
+											cpu_state <= S1;
+											machine_cycle <= M2; -- this is 2 cylces instruction
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when others =>
+							end case; -- end case cpu state
+							
+						when M2 =>
+							case cpu_state is
+								when S1 =>
+									case exe_state is
+										when P1 =>
+											exe_state <= P2;
+											
+										when P2 =>
+											exe_state <= P1;
+											cpu_state <= S2;
+											
+										when others =>
+									end case;
+									
+								when S2 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S3;
+											
+										when others =>
+									end case; -- end case exe state
+								
+								when S3 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S4;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S4 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S5;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S5 =>
+									case exe_state is
+										when P1	=> 
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S6;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S6 =>
+									case exe_state is
+										when P1	=> 
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S1;
+											machine_cycle <= M1; -- end 2 cycles instruction, back to M1
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when others =>
+							end case; -- end case cpu state
+							
+						when others =>
+					end case; -- end case machine cycle
+
+				-- MOVC A,@A+DPTR
+				-- 2 bytes, 2 cycles
+				-- Author: Gaurav Chandrashekar
+				-- Status: Not Simulated
+				when  "10010011" =>
+					case machine_cycle is
+						when M1 =>
+							case cpu_state is
+								when S2 =>
+									case exe_state is
+										when P1	=>
+											RAM_RD_BYTE_START(x"83"); -- data high pointer
+											exe_state <= P2;
+										
+										when P2	=>
+											DR <= i_ram_doByte;
+											RAM_RD_BYTE_START(x"82"); -- data low pointer
+											exe_state <= P1;
+											cpu_state <= S3;
+											
+										when others =>
+									end case; -- end case exe state
+								
+								when S3 =>
+									case exe_state is
+										when P1	=>
+											AR <= i_ram_doByte;
+											RAM_RD_BYTE_START(x"E0");
+											exe_state <= P2;
+										
+										when P2	=>
+											ACC <= i_ram_doByte;
+											exe_state <= P1;
+											cpu_state <= S4;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S4 =>
+									case exe_state is
+										when P1	=>
+											alu_src_2L <= AR;
+											alu_src_2H <= DR;
+											alu_src_1L <= ACC;
+											alu_src_1H <= "00000000";
+											alu_by_wd <= '1';
+											alu_op_code <= ALU_OPC_ADD;
+											exe_state <= P2;
+										
+										when P2	=>
+											ROM_RD_START(alu_ans_H & alu_ans_L);
+											-- (A) +(DPTR)
+											exe_state <= P1;
+											cpu_state <= S5;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S5 =>
+									case exe_state is
+										when P1	=> 
+											RAM_WR_BYTE_START(x"E0",i_rom_data);
+											exe_state <= P2;
+										
+										when P2	=>
+											RAM_STOP;
+											ROM_STOP;
+											exe_state <= P1;
+											cpu_state <= S6;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S6 =>
+									case exe_state is
+										when P1	=>  
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S1;
+											machine_cycle <= M2; -- this is 2 cylces instruction
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when others =>
+							end case; -- end case cpu state
+							
+						when M2 =>
+							case cpu_state is
+								when S1 =>
+									case exe_state is
+										when P1 =>
+											exe_state <= P2;
+											
+										when P2 =>
+											exe_state <= P1;
+											cpu_state <= S2;
+											
+										when others =>
+									end case;
+									
+								when S2 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S3;
+											
+										when others =>
+									end case; -- end case exe state
+								
+								when S3 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S4;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S4 =>
+									case exe_state is
+										when P1	=>
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S5;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S5 =>
+									case exe_state is
+										when P1	=> 
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S6;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S6 =>
+									case exe_state is
+										when P1	=> 
+											exe_state <= P2;
+										
+										when P2	=>
+											exe_state <= P1;
+											cpu_state <= S1;
+											machine_cycle <= M1; -- end 2 cycles instruction, back to M1
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when others =>
+							end case; -- end case cpu state
+							
+						when others =>
+					end case; -- end case machine cycle
+
 
 				when others =>
 			end case; -- end case IR

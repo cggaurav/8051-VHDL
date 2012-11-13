@@ -18,7 +18,7 @@ Parsing VHDL file "C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/8051_top_fpga.
 Parsing VHDL file "C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/test.vhd" into library work
 Starting static elaboration
 Completed static elaboration
-Fuse Memory Usage: 100908 KB
+Fuse Memory Usage: 100652 KB
 Fuse CPU Usage: 190 ms
 Compiling package standard
 Compiling package std_logic_1164
@@ -41,5 +41,5 @@ Compiling architecture behavior of entity test
 Time Resolution for simulation is 1ps.
 Compiled 29 VHDL Units
 Built simulation executable C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/test_isim_beh.exe
-Fuse Memory Usage: 126364 KB
-Fuse CPU Usage: 780 ms
+Fuse Memory Usage: 126108 KB
+Fuse CPU Usage: 840 ms

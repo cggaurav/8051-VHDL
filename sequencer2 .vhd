@@ -12775,12 +12775,12 @@ begin
 								when S2 =>
 									case exe_state is
 										when P1	=>
-											RAM_RD_BYTE_START(x"81");
+											RAM_RD_BYTE_START(x"D0");
 											exe_state <= P2;
 										
 										when P2	=>
-											AR <= i_ram_doByte;
-											RAM_RD_BYTE_START(AR);
+											PSW <= i_ram_doByte;
+											RAM_RD_BYTE_START( "000" & PSW(4 downto 3) & "00" & IR(0));
 											exe_state <= P1;
 											cpu_state <= S3;
 											
@@ -12790,26 +12790,27 @@ begin
 								when S3 =>
 									case exe_state is
 										when P1	=>
-											AR <= AR - 1;
 											DR <= i_ram_doByte;
+											ale <= '1'; -- assert ALE
+											RAM_WR_BYTE_START(x"80",DR);
 											exe_state <= P2;
 										
 										when P2	=>
+											ale <= '0'; -- deassert ALE
 											exe_state <= P1;
 											cpu_state <= S4;
-											
+											RAM_WR_BYTE_START(x"80","00000000");
 										when others =>
 									end case; -- end case exe state
 									
 								when S4 =>
 									case exe_state is
 										when P1	=>  
-											ROM_RD_START(PC);
+											RAM_WR_BIT_START("10110111",'1');  --turn on read strobe
+											-- xBO(7 down to 3) & "111"
 											exe_state <= P2;
 										
 										when P2	=>
-											PC <= PC + 1;
-											ROM_STOP;
 											exe_state <= P1;
 											cpu_state <= S5;
 											
@@ -12819,9 +12820,13 @@ begin
 								when S5 =>
 									case exe_state is
 										when P1	=> 
+											RAM_RD_BYTE_START(x"80");
 											exe_state <= P2;
 										
 										when P2	=>
+
+											ACC <= i_ram_doByte;
+											RAM_WR_BIT_START("10110111",'0');
 											exe_state <= P1;
 											cpu_state <= S6;
 											
@@ -12831,11 +12836,10 @@ begin
 								when S6 =>
 									case exe_state is
 										when P1	=>  
-											RAM_WR_BYTE_START(i_rom_data,DR);
+											RAM_WR_BYTE_START(x"E0",ACC);
 											exe_state <= P2;
 										
 										when P2	=>
-											RAM_WR_BYTE_START(x"81",AR);
 										   	RAM_STOP;
 											exe_state <= P1;
 											cpu_state <= S1;
@@ -12939,12 +12943,12 @@ begin
 								when S2 =>
 									case exe_state is
 										when P1	=>
-											RAM_RD_BYTE_START(x"81");
+											RAM_RD_BYTE_START(x"82");
 											exe_state <= P2;
 										
 										when P2	=>
 											AR <= i_ram_doByte;
-											RAM_RD_BYTE_START(AR);
+											RAM_RD_BYTE_START(x"83");
 											exe_state <= P1;
 											cpu_state <= S3;
 											
@@ -12954,11 +12958,11 @@ begin
 								when S3 =>
 									case exe_state is
 										when P1	=>
-											AR <= AR - 1;
 											DR <= i_ram_doByte;
 											exe_state <= P2;
 										
 										when P2	=>
+											RAM_WR_BYTE_START(x"A0",DR);
 											exe_state <= P1;
 											cpu_state <= S4;
 											
@@ -12968,12 +12972,13 @@ begin
 								when S4 =>
 									case exe_state is
 										when P1	=>  
-											ROM_RD_START(PC);
+											RAM_WR_BYTE_START(x80,AR);
+											ale <= '1'; -- assert ale
 											exe_state <= P2;
 										
 										when P2	=>
-											PC <= PC + 1;
-											ROM_STOP;
+											
+											RAM_WR_BYTE_START(x"A0","00000000");
 											exe_state <= P1;
 											cpu_state <= S5;
 											
@@ -12983,9 +12988,13 @@ begin
 								when S5 =>
 									case exe_state is
 										when P1	=> 
+											ale <= '0';
+											
+											RAM_WR_BYTE_START(x"80",AR);
 											exe_state <= P2;
 										
 										when P2	=>
+											RAM_WR_BIT_START("10110111",'1');
 											exe_state <= P1;
 											cpu_state <= S6;
 											
@@ -12994,13 +13003,15 @@ begin
 									
 								when S6 =>
 									case exe_state is
-										when P1	=>  
-											RAM_WR_BYTE_START(i_rom_data,DR);
+										when P1	=> 
+
+											
+											RAM_RD_BYTE_START(x"80");
 											exe_state <= P2;
 										
 										when P2	=>
-											RAM_WR_BYTE_START(x"81",AR);
-										   	RAM_STOP;
+											ACC <= i_ram_doByte;
+											RAM_WR_BIT_START("10110111",'0');
 											exe_state <= P1;
 											cpu_state <= S1;
 											machine_cycle <= M2; -- this is 2 cylces instruction
@@ -13016,6 +13027,8 @@ begin
 								when S1 =>
 									case exe_state is
 										when P1 =>
+											
+RAM_WR_BYTE_START(x"E0", ACC);
 											exe_state <= P2;
 											
 										when P2 =>
@@ -13103,12 +13116,12 @@ begin
 								when S2 =>
 									case exe_state is
 										when P1	=>
-											RAM_RD_BYTE_START(x"81");
+											RAM_RD_BYTE_START(x"D0");
 											exe_state <= P2;
 										
 										when P2	=>
-											AR <= i_ram_doByte;
-											RAM_RD_BYTE_START(AR);
+											PSW <= i_ram_doByte;
+											RAM_RD_BYTE_START("000" & PSW(4 downto 3) &"00" &IR(0));
 											exe_state <= P1;
 											cpu_state <= S3;
 											
@@ -13118,11 +13131,14 @@ begin
 								when S3 =>
 									case exe_state is
 										when P1	=>
-											AR <= AR - 1;
-											DR <= i_ram_doByte;
+											RAM_WR_BYTE_START(x"80",i_ram_doByte);
+											ale <= '1';
 											exe_state <= P2;
 										
 										when P2	=>
+											
+RAM_WR_BYTE_START(x"80","00000000");
+											ale<= '0';
 											exe_state <= P1;
 											cpu_state <= S4;
 											
@@ -13132,12 +13148,13 @@ begin
 								when S4 =>
 									case exe_state is
 										when P1	=>  
-											ROM_RD_START(PC);
+											
+RAM_RD_BYTE_START(x"E0");
 											exe_state <= P2;
 										
 										when P2	=>
-											PC <= PC + 1;
-											ROM_STOP;
+											
+RAM_WR_BYTE_START(x"80",i_ram_doByte);
 											exe_state <= P1;
 											cpu_state <= S5;
 											
@@ -13147,9 +13164,11 @@ begin
 								when S5 =>
 									case exe_state is
 										when P1	=> 
+											RAM_WR_BIT_START("10110110",'1');  --turn on read strobe
 											exe_state <= P2;
 										
 										when P2	=>
+											RAM_WR_BIT_START("10110110",'0');  -- turn off write strobe
 											exe_state <= P1;
 											cpu_state <= S6;
 											
@@ -13159,12 +13178,12 @@ begin
 								when S6 =>
 									case exe_state is
 										when P1	=>  
-											RAM_WR_BYTE_START(i_rom_data,DR);
+											
+RAM_WR_BYTE_START(x"80", "00000000"); --reset P0
 											exe_state <= P2;
 										
 										when P2	=>
-											RAM_WR_BYTE_START(x"81",AR);
-										   	RAM_STOP;
+											RAM_STOP;
 											exe_state <= P1;
 											cpu_state <= S1;
 											machine_cycle <= M2; -- this is 2 cylces instruction
@@ -13267,12 +13286,12 @@ begin
 								when S2 =>
 									case exe_state is
 										when P1	=>
-											RAM_RD_BYTE_START(x"81");
+											RAM_RD_BYTE_START(x"E0");
 											exe_state <= P2;
 										
 										when P2	=>
-											AR <= i_ram_doByte;
-											RAM_RD_BYTE_START(AR);
+											ACC <= i_ram_doByte;
+											RAM_RD_BYTE_START(x"82");
 											exe_state <= P1;
 											cpu_state <= S3;
 											
@@ -13282,11 +13301,12 @@ begin
 								when S3 =>
 									case exe_state is
 										when P1	=>
-											AR <= AR - 1;
-											DR <= i_ram_doByte;
+											AR <= i_ram_doByte;
+											RAM_RD_BYTE_START(x"83");
 											exe_state <= P2;
 										
 										when P2	=>
+											DR <=i_ram_doByte;
 											exe_state <= P1;
 											cpu_state <= S4;
 											
@@ -13296,12 +13316,12 @@ begin
 								when S4 =>
 									case exe_state is
 										when P1	=>  
-											ROM_RD_START(PC);
+											RAM_WR_BYTE_START(x"A0",DR);
 											exe_state <= P2;
 										
 										when P2	=>
-											PC <= PC + 1;
-											ROM_STOP;
+											RAM_WR_BYTE_START(x"80",AR);
+											ale <= '1'; -- assert ale
 											exe_state <= P1;
 											cpu_state <= S5;
 											
@@ -13311,9 +13331,12 @@ begin
 								when S5 =>
 									case exe_state is
 										when P1	=> 
+											RAM_WR_BYTE_START(x"A0","00000000"); -- reset P2
 											exe_state <= P2;
 										
 										when P2	=>
+											ale <= '0';
+											RAM_WR_BYTE_START(x"80","00000000");  --reset P0
 											exe_state <= P1;
 											cpu_state <= S6;
 											
@@ -13323,7 +13346,7 @@ begin
 								when S6 =>
 									case exe_state is
 										when P1	=>  
-											RAM_WR_BYTE_START(i_rom_data,DR);
+											RAM_WR_BYTE_START(x"80",ACC);
 											exe_state <= P2;
 										
 										when P2	=>
@@ -13344,9 +13367,11 @@ begin
 								when S1 =>
 									case exe_state is
 										when P1 =>
+											RAM_WR_BIT_START("10110110",'1'); -- turn on write strobe
 											exe_state <= P2;
 											
 										when P2 =>
+											RAM_WR_BIT_START("10110110",'0'); -- turn off write strobe
 											exe_state <= P1;
 											cpu_state <= S2;
 											
@@ -13356,6 +13381,7 @@ begin
 								when S2 =>
 									case exe_state is
 										when P1	=>
+											RAM_WR_BYTE_START(x80,"00000000");
 											exe_state <= P2;
 										
 										when P2	=>
@@ -13407,6 +13433,7 @@ begin
 											exe_state <= P2;
 										
 										when P2	=>
+											RAM_STOP;
 											exe_state <= P1;
 											cpu_state <= S1;
 											machine_cycle <= M1; -- end 2 cycles instruction, back to M1
@@ -13424,7 +13451,7 @@ begin
 				-- 2 bytes, 2 cycles
 				-- Author: Gaurav Chandrashekar
 				-- Status: Not Simulated
-				when  "11100010" | "11100011" =>
+				when  "10000011" =>
 					case machine_cycle is
 						when M1 =>
 							case cpu_state is

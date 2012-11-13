@@ -2,12 +2,12 @@ AR int_rom behavioral C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/int_rom.vhd
 EN int_rom NULL C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/int_rom.vhd sub00/vhpl00 1352806503
 AR ext_interrupt behavioral C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/ext_interrupt.vhd sub00/vhpl08 1352806492
 EN regfile NULL C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/regfile.vhd sub00/vhpl13 1352806499
-EN sequencer2 NULL "C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/sequencer2 .vhd" sub00/vhpl03 1352806495
-PH constants NULL C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/constants.vhd sub00/vhpl02 1352806490
+EN sequencer2 NULL "C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/sequencer2 .vhd" sub00/vhpl03 1352832928
+PH constants NULL C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/constants.vhd sub00/vhpl02 1352832927
 EN divider NULL C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/divider.vhd sub00/vhpl19 1352806507
 AR int_handler behavioral C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/int_handler.vhd sub00/vhpl06 1352806510
 AR fastalu fastalu_arch C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/fastalu.vhd sub00/vhpl12 1352806498
-AR sequencer2 seq_arch "C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/sequencer2 .vhd" sub00/vhpl04 1352806496
+AR sequencer2 seq_arch "C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/sequencer2 .vhd" sub00/vhpl04 1352832929
 EN multiplier NULL C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/multiplier.vhd sub00/vhpl15 1352806501
 EN int_handler NULL C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/int_handler.vhd sub00/vhpl05 1352806509
 EN i8051_top NULL C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/8051_top_fpga.vhd sub00/vhpl21 1352806511

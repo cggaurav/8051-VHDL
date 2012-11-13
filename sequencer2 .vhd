@@ -5498,30 +5498,30 @@ begin
 				 case machine_cycle is
 					 when M1 =>
 					 case cpu_state is
-						when S2 =>
+					when S2 =>
 						
 						case exe_state is
-                        when P1 =>
-									 RAM_RD_BYTE_START(x"E0");
-                            exe_state <= P2; 
-                        when P2 =>
-                            exe_state <= P1;
-									 cpu_state <= S3; 
-								 when others =>
-						 end case;
+	                        when P1 =>
+								RAM_RD_BYTE_START(x"E0");
+	                            exe_state <= P2; 
+	                        when P2 =>
+	                            exe_state <= P1;
+								cpu_state <= S3; 
+							when others =>
+						end case;
                 
 					when S3 =>
 					 
 						case exe_state is
                         when P1 =>
-									 RAM_WR_BYTE_START(x"E0", i_ram_doByte(3 downto 0) & i_ram_doByte(7 downto 4));
+							RAM_WR_BYTE_START(x"E0", i_ram_doByte(3 downto 0) & i_ram_doByte(7 downto 4));
                             exe_state <= P2;
                         when P2 =>
-									 RAM_STOP;
+							RAM_STOP;
                             exe_state <= P1;
-									 cpu_state <= S4;
-								 when others =>
-						 end case;
+							cpu_state <= S4;
+						when others =>
+						end case;
 
 					when S4 =>
 					 
@@ -5530,9 +5530,9 @@ begin
                             exe_state <= P2;
                         when P2 => 
                             exe_state <= P1;
-									 cpu_state <= S5;
-								 when others =>
-						 end case;
+							cpu_state <= S5;
+						when others =>
+						end case;
 
 					when S5 =>
 					 
@@ -6094,6 +6094,7 @@ begin
 											exe_state <= P2;
 										
 										when P2	=>
+											ACC <= i_ram_doByte;
 											exe_state <= P1;
 											cpu_state <= S6;
 											
@@ -6103,12 +6104,11 @@ begin
 								when S6 =>
 									case exe_state is
 										when P1	=>  
-											RAM_WR_BYTE_START("000" & PSW(4 downto 3) & IR(2 downto 0), i_ram_doByte); -- Rn <= ACC
+											RAM_WR_BYTE_START("000" & PSW(4 downto 3) & IR(2 downto 0), ACC); -- Rn <= ACC
 											exe_state <= P2;
 										
 										when P2	=>
 											RAM_WR_BYTE_START(x"E0", DR); -- ACC <= Rn (or DR)
-											RAM_STOP;
 											exe_state <= P1;
 											cpu_state <= S1;
 											machine_cycle <= M1;
@@ -6163,6 +6163,7 @@ begin
 										when P2	=>
 											PC <= PC + 1;
 											AR <= i_rom_data;
+											RAM_RD_BYTE_START(AR);
 											exe_state <= P1;
 											cpu_state <= S5;
 											
@@ -6172,12 +6173,11 @@ begin
 								when S5 =>
 									case exe_state is
 										when P1	=> 
-											RAM_RD_BYTE_START(AR);
+											RAM_RD_BYTE_START(x"E0");
 											DR <= i_ram_doByte;
 											exe_state <= P2;
 										
 										when P2	=>
-											RAM_RD_BYTE_START(x"E0");
 											ACC <= i_ram_doByte;
 											exe_state <= P1;
 											cpu_state <= S6;
@@ -6194,7 +6194,6 @@ begin
 										when P2	=>
 											RAM_WR_BYTE_START(x"E0", DR); -- ACC <= direct
 											ROM_STOP;
-											RAM_STOP;
 											exe_state <= P1;
 											cpu_state <= S1;
 											machine_cycle <= M1;
@@ -6249,7 +6248,8 @@ begin
 									
 								when S4 => -- 1 byte instruction, do nothing here
 									case exe_state is
-										when P1	=>  
+										when P1	=>
+											ACC <= i_ram_doByte;  
 											exe_state <= P2;
 										
 										when P2	=>
@@ -6276,12 +6276,11 @@ begin
 								when S6 =>
 									case exe_state is
 										when P1	=>  
-											RAM_WR_BYTE_START(AR, i_ram_doByte); -- @Ri <= ACC
+											RAM_WR_BYTE_START(AR, ACC); -- @Ri <= ACC
 											exe_state <= P2;
 										
 										when P2	=>
 											RAM_WR_BYTE_START(x"E0", DR); -- ACC <= @Ri (or DR)
-											RAM_STOP;
 											exe_state <= P1;
 											cpu_state <= S1;
 											machine_cycle <= M1;
@@ -6307,7 +6306,6 @@ begin
 									case exe_state is
 										when P1	=>
 											RAM_RD_BYTE_START(x"D0");
-											
 											exe_state <= P2;
 										
 										when P2	=>
@@ -6368,7 +6366,6 @@ begin
 										
 										when P2	=>
 											RAM_WR_BYTE_START(x"E0", ACC(7 downto 4) & DR(3 downto 0)); -- ACC <= ACC(7-4) & @Ri (3-0)
-											RAM_STOP;
 											exe_state <= P1;
 											cpu_state <= S1;
 											machine_cycle <= M1;

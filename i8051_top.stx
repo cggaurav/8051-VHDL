@@ -4,7 +4,7 @@ Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.08 secs
+Total CPU time to Xst completion: 0.07 secs
  
 --> Parameter xsthdpdir set to C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/xst
 
@@ -32,7 +32,8 @@ Architecture regarch of Entity regfile is up to date.
 Compiling vhdl file "C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/multiplier.vhd" in Library work.
 Architecture rtl of Entity multiplier is up to date.
 Compiling vhdl file "C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/int_rom.vhd" in Library work.
-Architecture behavioral of Entity int_rom is up to date.
+Entity <int_rom> compiled.
+Entity <int_rom> (Architecture <behavioral>) compiled.
 Compiling vhdl file "C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/int_ram.vhd" in Library work.
 Architecture syn of Entity internal_ram is up to date.
 Compiling vhdl file "C:/Users/cggauravVB/Documents/CG3207/8051-VHDL/divider.vhd" in Library work.
@@ -44,7 +45,7 @@ Architecture behavioral of Entity i8051_top is up to date.
 
 
 Total REAL time to Xst completion: 1.00 secs
-Total CPU time to Xst completion: 0.67 secs
+Total CPU time to Xst completion: 0.59 secs
  
 --> 
 

@@ -6754,7 +6754,11 @@ begin
 										
 										when P2	=>
 											if (i_ram_doBit = '0') then
-												PC <= PC + ("00000000" & DR);
+												if(DR(7) = '1') then
+													PC <= PC + (x"FF" & DR);
+												else
+													PC <= PC + (x"00" & DR);
+												end if;
 											end if;
 											RAM_STOP;
 											exe_state <= P1;

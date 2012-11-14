@@ -171,17 +171,20 @@ begin
 	 if (machine_cycle = M1 and cpu_state = S1) then -- This is the same for every instruction
 			case exe_state is
 				when P1	=>
-					if (int_hold = '0') then	-- Interrupts are enabled
-						case interrupt_flag is
-							when "001" | "010" | "011" | "100" | "101" =>
-								int_hold <= '1';	-- disable interrupt
-								exe_state <= P1;
-								cpu_state <= I0;	-- jump into interrupt service routine
-							when others =>			-- no interrupt
-								ROM_RD_START(PC);	-- fetch and decode instruction
-								exe_state <= P2;	
-						end case;
-					end if;
+--					if (int_hold = '0') then	-- Interrupts are enabled
+--						case interrupt_flag is
+--							when "001" | "010" | "011" | "100" | "101" =>
+--								int_hold <= '1';	-- disable interrupt
+--								exe_state <= P1;
+--								cpu_state <= I0;	-- jump into interrupt service routine
+--							when others =>			-- no interrupt
+--								ROM_RD_START(PC);	-- fetch and decode instruction
+--								exe_state <= P2;	
+--						end case;
+--					else
+						ROM_RD_START(PC);	-- fetch and decode instruction
+						exe_state <= P2;	
+--					end if;
 							
 				when P2	=> 	
 					IR <= i_rom_data;
@@ -1918,7 +1921,7 @@ begin
 						case exe_state is
                         when P1 =>
                             RAM_WR_BYTE_START(x"E0", i_ram_doByte(6 downto 0) & PSW(7));
-                            int_hold <= i_ram_doByte(7); --CY
+                            DR(0) <= i_ram_doByte(7); --CY
                             exe_state <= P2;
                         when P2 =>
                             exe_state <= P1;
@@ -1953,7 +1956,7 @@ begin
 					 
 						case exe_state is
                         when P1 =>
-								    RAM_WR_BYTE_START(x"D0", int_hold & PSW(6 downto 0));
+								    RAM_WR_BYTE_START(x"D0", DR(0) & PSW(6 downto 0));
                             exe_state <= P2;
                         when P2 => 
 									 RAM_STOP;
@@ -2070,7 +2073,7 @@ begin
 						case exe_state is
                         when P1 =>
                             RAM_WR_BYTE_START(x"E0", PSW(7) & i_ram_doByte(7 downto 1));
-                            int_hold <= i_ram_doByte(7); --CY
+                            DR(0) <= i_ram_doByte(7); --CY
                             exe_state <= P2;
                         when P2 =>
                             exe_state <= P1;
@@ -2105,7 +2108,7 @@ begin
 					 
 						case exe_state is
                         when P1 =>
-								    RAM_WR_BYTE_START(x"D0", int_hold & PSW(6 downto 0));
+								    RAM_WR_BYTE_START(x"D0", DR(0) & PSW(6 downto 0));
                             exe_state <= P2;
                         when P2 => 
 									 RAM_STOP;
@@ -4941,9 +4944,11 @@ begin
 									case exe_state is
 										when P1	=> 
 											PC(10 downto 0) <= IR(7 downto 5) & DR;
+											RAM_WR_BYTE_START(x"81", AR);
 											exe_state <= P2;
 										
 										when P2	=>
+											RAM_STOP;
 											exe_state <= P1;
 											cpu_state <= S1;
 											machine_cycle <= M1; -- end 2 cycles instruction, back to M1
@@ -5281,7 +5286,6 @@ begin
 								when S6 =>
 									case exe_state is
 										when P1	=>
-											int_hold <= '0';	-- re-enable interrupts
 											exe_state <= P2;
 										
 										when P2	=>
@@ -5447,6 +5451,7 @@ begin
 								when S6 =>
 									case exe_state is
 										when P1	=> 
+											int_hold <= '0';	-- re-enable interrupts
 											exe_state <= P2;
 										
 										when P2	=>
@@ -12548,7 +12553,7 @@ begin
 						when others =>
 					end case; -- end case machine cycle
 					
-						-- XCH A, Rn
+				-- XCH A, Rn
 				-- 1 byte, 1 cycle
 				-- Author: Akash Ranka
 				-- Status: Simulated

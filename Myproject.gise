@@ -124,21 +124,11 @@
       <status xil_pn:value="ReadyToRun"/>
       <status xil_pn:value="OutOfDateForInputs"/>
       <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputAdded"/>
       <status xil_pn:value="InputChanged"/>
+      <status xil_pn:value="InputRemoved"/>
       <status xil_pn:value="OutputChanged"/>
-      <outfile xil_pn:name="8051_top_fpga.vhd"/>
-      <outfile xil_pn:name="constants.vhd"/>
-      <outfile xil_pn:name="csadder.vhd"/>
-      <outfile xil_pn:name="divider.vhd"/>
-      <outfile xil_pn:name="ext_interrupt.vhd"/>
-      <outfile xil_pn:name="fastalu.vhd"/>
-      <outfile xil_pn:name="int_handler.vhd"/>
-      <outfile xil_pn:name="int_ram.vhd"/>
-      <outfile xil_pn:name="int_rom.vhd"/>
-      <outfile xil_pn:name="multiplier.vhd"/>
-      <outfile xil_pn:name="regfile.vhd"/>
-      <outfile xil_pn:name="sequencer2 .vhd"/>
-      <outfile xil_pn:name="test.vhd"/>
+      <status xil_pn:value="OutputRemoved"/>
     </transform>
     <transform xil_pn:end_ts="1352807117" xil_pn:name="TRAN_xawsToSimhdl" xil_pn:prop_ck="5812269477055105344" xil_pn:start_ts="1352807117">
       <status xil_pn:value="SuccessfullyRun"/>
@@ -159,20 +149,9 @@
       <status xil_pn:value="OutOfDateForPredecessor"/>
       <status xil_pn:value="OutOfDateForOutputs"/>
       <status xil_pn:value="InputChanged"/>
+      <status xil_pn:value="InputRemoved"/>
       <status xil_pn:value="OutputChanged"/>
-      <outfile xil_pn:name="8051_top_fpga.vhd"/>
-      <outfile xil_pn:name="constants.vhd"/>
-      <outfile xil_pn:name="csadder.vhd"/>
-      <outfile xil_pn:name="divider.vhd"/>
-      <outfile xil_pn:name="ext_interrupt.vhd"/>
-      <outfile xil_pn:name="fastalu.vhd"/>
-      <outfile xil_pn:name="int_handler.vhd"/>
-      <outfile xil_pn:name="int_ram.vhd"/>
-      <outfile xil_pn:name="int_rom.vhd"/>
-      <outfile xil_pn:name="multiplier.vhd"/>
-      <outfile xil_pn:name="regfile.vhd"/>
-      <outfile xil_pn:name="sequencer2 .vhd"/>
-      <outfile xil_pn:name="test.vhd"/>
+      <status xil_pn:value="OutputRemoved"/>
     </transform>
     <transform xil_pn:end_ts="1352807127" xil_pn:in_ck="-1045997680193625984" xil_pn:name="TRAN_ISimulateBehavioralModelRunFuse" xil_pn:prop_ck="1172389459669044308" xil_pn:start_ts="1352807117">
       <status xil_pn:value="SuccessfullyRun"/>
@@ -182,24 +161,20 @@
       <status xil_pn:value="OutOfDateForPredecessor"/>
       <status xil_pn:value="OutOfDateForOutputs"/>
       <status xil_pn:value="InputChanged"/>
+      <status xil_pn:value="InputRemoved"/>
       <status xil_pn:value="OutputChanged"/>
-      <outfile xil_pn:name="fuse.log"/>
-      <outfile xil_pn:name="isim"/>
-      <outfile xil_pn:name="isim.log"/>
-      <outfile xil_pn:name="test_beh.prj"/>
-      <outfile xil_pn:name="test_isim_beh.exe"/>
-      <outfile xil_pn:name="xilinxsim.ini"/>
+      <status xil_pn:value="OutputRemoved"/>
     </transform>
     <transform xil_pn:end_ts="1352807127" xil_pn:in_ck="6654477430484604635" xil_pn:name="TRAN_ISimulateBehavioralModel" xil_pn:prop_ck="1912148073333665495" xil_pn:start_ts="1352807127">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
       <status xil_pn:value="OutOfDateForProperties"/>
       <status xil_pn:value="OutOfDateForPredecessor"/>
       <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputRemoved"/>
       <status xil_pn:value="OutputChanged"/>
-      <outfile xil_pn:name="isim.cmd"/>
-      <outfile xil_pn:name="isim.log"/>
-      <outfile xil_pn:name="test_isim_beh.wdb"/>
+      <status xil_pn:value="OutputRemoved"/>
     </transform>
     <transform xil_pn:end_ts="1349029224" xil_pn:name="TRAN_copyInitialToXSTAbstractSynthesis" xil_pn:start_ts="1349029224">
       <status xil_pn:value="SuccessfullyRun"/>
@@ -234,21 +209,11 @@
       <status xil_pn:value="ReadyToRun"/>
       <status xil_pn:value="OutOfDateForInputs"/>
       <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputAdded"/>
       <status xil_pn:value="InputChanged"/>
+      <status xil_pn:value="InputRemoved"/>
       <status xil_pn:value="OutputChanged"/>
-      <outfile xil_pn:name=".lso"/>
-      <outfile xil_pn:name="_xmsgs/xst.xmsgs"/>
-      <outfile xil_pn:name="i8051_top.lso"/>
-      <outfile xil_pn:name="i8051_top.ngc"/>
-      <outfile xil_pn:name="i8051_top.ngr"/>
-      <outfile xil_pn:name="i8051_top.prj"/>
-      <outfile xil_pn:name="i8051_top.stx"/>
-      <outfile xil_pn:name="i8051_top.syr"/>
-      <outfile xil_pn:name="i8051_top.xst"/>
-      <outfile xil_pn:name="i8051_top_vhdl.prj"/>
-      <outfile xil_pn:name="i8051_top_xst.xrpt"/>
-      <outfile xil_pn:name="webtalk_pn.xml"/>
-      <outfile xil_pn:name="xst"/>
+      <status xil_pn:value="OutputRemoved"/>
     </transform>
     <transform xil_pn:end_ts="1351324257" xil_pn:in_ck="-4831593407313779247" xil_pn:name="TRAN_compileBCD2" xil_pn:prop_ck="3235271162397068641" xil_pn:start_ts="1351324257">
       <status xil_pn:value="SuccessfullyRun"/>
@@ -257,67 +222,51 @@
     <transform xil_pn:end_ts="1351324266" xil_pn:in_ck="-9010642084702747136" xil_pn:name="TRANEXT_ngdbuild_FPGA" xil_pn:prop_ck="610579443499637143" xil_pn:start_ts="1351324257">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
       <status xil_pn:value="OutOfDateForPredecessor"/>
-      <outfile xil_pn:name="_ngo"/>
-      <outfile xil_pn:name="_xmsgs/ngdbuild.xmsgs"/>
-      <outfile xil_pn:name="i8051_top.bld"/>
-      <outfile xil_pn:name="i8051_top.ngd"/>
-      <outfile xil_pn:name="i8051_top_ngdbuild.xrpt"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputRemoved"/>
+      <status xil_pn:value="OutputRemoved"/>
     </transform>
     <transform xil_pn:end_ts="1351324280" xil_pn:in_ck="-9010642084702747135" xil_pn:name="TRANEXT_map_spartan3" xil_pn:prop_ck="-2836189773595213093" xil_pn:start_ts="1351324266">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="WarningsGenerated"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
       <status xil_pn:value="OutOfDateForPredecessor"/>
       <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputRemoved"/>
       <status xil_pn:value="OutputChanged"/>
-      <outfile xil_pn:name="_xmsgs/map.xmsgs"/>
-      <outfile xil_pn:name="i8051_top.pcf"/>
-      <outfile xil_pn:name="i8051_top_map.map"/>
-      <outfile xil_pn:name="i8051_top_map.mrp"/>
-      <outfile xil_pn:name="i8051_top_map.ncd"/>
-      <outfile xil_pn:name="i8051_top_map.ngm"/>
-      <outfile xil_pn:name="i8051_top_map.xrpt"/>
-      <outfile xil_pn:name="i8051_top_summary.xml"/>
-      <outfile xil_pn:name="i8051_top_usage.xml"/>
+      <status xil_pn:value="OutputRemoved"/>
     </transform>
     <transform xil_pn:end_ts="1351324726" xil_pn:in_ck="-5977735915893330534" xil_pn:name="TRANEXT_par_spartan3" xil_pn:prop_ck="3373904778572030817" xil_pn:start_ts="1351324280">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="WarningsGenerated"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
       <status xil_pn:value="OutOfDateForPredecessor"/>
-      <outfile xil_pn:name="_xmsgs/par.xmsgs"/>
-      <outfile xil_pn:name="i8051_top.ncd"/>
-      <outfile xil_pn:name="i8051_top.pad"/>
-      <outfile xil_pn:name="i8051_top.par"/>
-      <outfile xil_pn:name="i8051_top.ptwx"/>
-      <outfile xil_pn:name="i8051_top.unroutes"/>
-      <outfile xil_pn:name="i8051_top.xpi"/>
-      <outfile xil_pn:name="i8051_top_pad.csv"/>
-      <outfile xil_pn:name="i8051_top_pad.txt"/>
-      <outfile xil_pn:name="i8051_top_par.xrpt"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputRemoved"/>
+      <status xil_pn:value="OutputRemoved"/>
     </transform>
     <transform xil_pn:end_ts="1351324752" xil_pn:in_ck="-6432634985234107380" xil_pn:name="TRANEXT_bitFile_spartan3a" xil_pn:prop_ck="-426368325978129584" xil_pn:start_ts="1351324726">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="WarningsGenerated"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
       <status xil_pn:value="OutOfDateForPredecessor"/>
-      <outfile xil_pn:name="_xmsgs/bitgen.xmsgs"/>
-      <outfile xil_pn:name="i8051_top.bgn"/>
-      <outfile xil_pn:name="i8051_top.bit"/>
-      <outfile xil_pn:name="i8051_top.drc"/>
-      <outfile xil_pn:name="i8051_top.ut"/>
-      <outfile xil_pn:name="usage_statistics_webtalk.html"/>
-      <outfile xil_pn:name="webtalk.log"/>
-      <outfile xil_pn:name="webtalk_pn.xml"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputRemoved"/>
+      <status xil_pn:value="OutputRemoved"/>
     </transform>
     <transform xil_pn:end_ts="1351324726" xil_pn:in_ck="-9010642084702747267" xil_pn:name="TRAN_postRouteTrce" xil_pn:prop_ck="445577401284416186" xil_pn:start_ts="1351324717">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
       <status xil_pn:value="OutOfDateForPredecessor"/>
-      <outfile xil_pn:name="_xmsgs/trce.xmsgs"/>
-      <outfile xil_pn:name="i8051_top.twr"/>
-      <outfile xil_pn:name="i8051_top.twx"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputRemoved"/>
+      <status xil_pn:value="OutputRemoved"/>
     </transform>
     <transform xil_pn:end_ts="1349029328" xil_pn:in_ck="-6432634985234107249" xil_pn:name="TRAN_postSynthesisSimModel" xil_pn:prop_ck="547448974741123101" xil_pn:start_ts="1349029320">
       <status xil_pn:value="SuccessfullyRun"/>
@@ -326,6 +275,7 @@
       <status xil_pn:value="OutOfDateForPredecessor"/>
       <status xil_pn:value="OutOfDateForOutputs"/>
       <status xil_pn:value="InputChanged"/>
+      <status xil_pn:value="InputRemoved"/>
       <status xil_pn:value="OutputRemoved"/>
     </transform>
   </transforms>

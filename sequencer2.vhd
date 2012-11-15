@@ -10074,7 +10074,7 @@ begin
 					end case; -- end case machine cycle
 					
 					
-								-- ANL A, Rn
+				-- ANL A, Rn
 				-- 1 byte, 1 cycle
 				-- Autho : Gaurav Chandrashekar
 				-- Status : Simulated
@@ -13521,7 +13521,114 @@ begin
 							
 						when others =>
 					end case; -- end case machine cycle
-					
+				
+				-- DA A
+				-- 1 byte, 1 cycle
+				-- Autho : Gaurav Chandrashekar
+				-- Status : Not Simulated
+				when  "11010100"  =>
+					case machine_cycle is
+						when M1 =>
+							case cpu_state is
+								when S2 =>
+									case exe_state is
+										when P1	=>
+											RAM_RD_BYTE_START(x"E0");
+											exe_state <= P2;
+										
+										when P2	=>
+											RAM_RD_BYTE_START(x"D0");
+											ACC <= i_ram_doByte;
+											exe_state <= P1;
+											cpu_state <= S3;
+											
+										when others =>
+									end case; -- end case exe state
+								
+								when S3 =>
+									case exe_state is
+										when P1	=>
+											PSW <= i_ram_doByte;
+											RAM_RD_BIT_START(PSW + 6);
+											exe_state <= P2;
+										
+										when P2	=>
+											if i_ram_doBit = '1' 
+											   OR conv_integer(ACC(3 downto 0)) > 9 then
+											   alu_src_1L <= ACC;
+											   alu_src_2L <= "00000110";
+											   alu_op_code <= ALU_OPC_ADD;
+											   alu_by_wd <= '0';
+											   alu_cy_bw <= '0';
+											end if;
+											exe_state <= P1;
+											cpu_state <= S4;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S4 => -- 1 byte instruction, do nothing here
+									case exe_state is
+										when P1	=> 
+											alu_op_code <= ALU_OPC_NONE;
+											DR <= alu_ans_L;
+							
+											if alu_ac = '1' then -- set carry flag
+												RAM_WR_BIT_START(PSW + 7, '1');
+											end if;
+											exe_state <= P2;
+										
+										when P2	=>
+											RAM_RD_BIT_START(PSW + 7);
+											exe_state <= P1;
+											cpu_state <= S5;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S5 =>
+									case exe_state is
+										when P1	=> 
+											if i_ram_doBit = '1' OR DR(7 downto 4) > 9 then
+												alu_src_1L <= "0000" & DR(7 downto 4);
+												alu_src_2L <= "00000110";
+												alu_op_code <= ALU_OPC_ADD;
+												alu_by_wd <= '0';
+											end if;
+											exe_state <= P2;
+										
+										when P2	=>
+											DR(7 downto 4) <= alu_ans_L(3 downto 0);
+											if alu_ac = '1' then
+												RAM_WR_BIT_START(PSW +7, '1');
+											end if;
+											exe_state <= P1;
+											cpu_state <= S6;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when S6 =>
+									case exe_state is
+										when P1	=>  
+											RAM_WR_BYTE_START(x"E0",DR);
+											exe_state <= P2;
+										
+										when P2	=>
+											RAM_STOP;
+											exe_state <= P1;
+											cpu_state <= S1;
+											machine_cycle <= M1;
+											
+										when others =>
+									end case; -- end case exe state
+									
+								when others =>
+							end case; -- end case cpu state
+							
+						when others =>
+					end case; -- end case machine cycle
+	
 				when others =>
 			end case; -- end case IR
 	 end if;
